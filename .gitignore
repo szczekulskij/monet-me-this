@@ -162,3 +162,8 @@ build/
 
 ### VS Code ###
 .vscode/
+
+
+### Non-auto generated
+.DS_Store
+/images
