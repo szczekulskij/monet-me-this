@@ -167,3 +167,4 @@ build/
 ### Non-auto generated
 .DS_Store
 /images
+/frontend/node_modules
