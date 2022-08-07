@@ -10,4 +10,4 @@ monet paiting comparison(og vs artificial) based on GAN's generated paintings
 
 
 ## Useful information:
-* Initial fronted template taken from [link](https://github.com/cruip/open-react-template/)
+* Initial fronted template taken from [link](https://github.com/issaafalkattan/React-Landing-Page-Template)

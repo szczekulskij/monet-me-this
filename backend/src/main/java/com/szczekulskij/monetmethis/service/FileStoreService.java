@@ -19,6 +19,7 @@ public class FileStoreService {
 
     Path monetPhotosLocation = Paths.get("images/artists/monet/monet_jpg");
     Path nonMonetPhotosLocation = Paths.get("images/random_images/photo_jpg");
+    
 
     public Resource loadImage(boolean isMonet) {
         try {
@@ -51,7 +52,6 @@ public class FileStoreService {
         // Get random filename
         Path filename = allFiles.get(random);
 
-        System.out.println("allFiles" + allFiles);
         System.out.println("filename" + filename);
         
         return folder_location.resolve(filename);
