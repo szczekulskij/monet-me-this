@@ -27,7 +27,6 @@ public class FileStoreService {
             Path file;
             if (isMonet){ file = randomFileNameGenerator(monetPhotosLocation); }
             else { file = randomFileNameGenerator(nonMonetPhotosLocation); }
-            // else { file = nonMonetPhotosLocation.resolve("0a0c3a6d07.jpg"); }
             Resource resource = new UrlResource(file.toUri());
 
             if (resource.exists() || resource.isReadable()) {
@@ -43,17 +42,12 @@ public class FileStoreService {
     public Path randomFileNameGenerator(Path folder_location){
         // Get list of all the files
         ArrayList<Path> allFiles = loadAllFiles(folder_location);
-
         // Get random number from 0 to len(List) - 1
         int listSize = allFiles.size();
         Random rand = new Random();
         int random = rand.nextInt(listSize);
-
         // Get random filename
         Path filename = allFiles.get(random);
-
-        System.out.println("filename" + filename);
-        
         return folder_location.resolve(filename);
     }
 

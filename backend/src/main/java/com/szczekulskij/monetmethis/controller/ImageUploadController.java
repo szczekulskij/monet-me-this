@@ -2,6 +2,8 @@ package com.szczekulskij.monetmethis.controller;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.ObjectInputFilter.Config;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -30,15 +32,6 @@ public class ImageUploadController {
         Resource file = fileStoreService.loadImage(false);
         return ResponseEntity.ok().header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + file.getFilename() + "\"").body(file);
     }
-
-    @GetMapping(value = "/new", produces = MediaType.IMAGE_JPEG_VALUE)
-    public @ResponseBody byte[] getFile() throws IOException {
-        Path nonMonetPhotosLocation = Paths.get("images/random_images/photo_jpg");
-        String filepath = fileStoreService.randomFileNameGenerator(nonMonetPhotosLocation).toString();
-        InputStream in = getClass().getResourceAsStream(filepath);
-        return IOUtils.toByteArray(in);
-    }
-
     @GetMapping(value = "/randomMonet", produces = MediaType.IMAGE_JPEG_VALUE)
     public ResponseEntity<Resource> randomMonet(){
         Resource file = fileStoreService.loadImage(true);
