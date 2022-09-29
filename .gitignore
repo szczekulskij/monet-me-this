@@ -170,3 +170,4 @@ build/
 /frontend/node_modules
 /backend/bin
 /backend/build
+testing.ipynb
