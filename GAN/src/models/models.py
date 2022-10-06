@@ -82,11 +82,6 @@ def resnet(height=IMAGE_SIZE, width=IMAGE_SIZE):
     return model
 
 
-import tensorflow as tf
-from tensorflow import keras
-import tensorflow_addons as tfa
-from src.config import IMAGE_SIZE
-
 def discriminator(height=IMAGE_SIZE, width=IMAGE_SIZE):
     initializer = tf.random_normal_initializer(0., 0.02)
     # gamma_init = keras.initializers.RandomNormal(mean=0.0, stddev=0.02)

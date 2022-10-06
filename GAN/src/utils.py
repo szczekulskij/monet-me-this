@@ -11,7 +11,7 @@ def connect_to_tpu():
     print('Number of replicas:', strategy.num_replicas_in_sync)
 
     autotune = tf.data.experimental.AUTOTUNE
-    return autotune
+    return autotune, strategy
 
 if __name__ == "__main__":
-    autotune = connect_to_tpu()
+    autotune,strategy = connect_to_tpu()
