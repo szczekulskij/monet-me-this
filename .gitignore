@@ -166,9 +166,10 @@ build/
 
 ### Non-auto generated
 .DS_Store
-/images
 /frontend/node_modules
 /backend/bin
 /backend/build
 testing.ipynb
 images.zip
+*.jpg
+*.tfrec
