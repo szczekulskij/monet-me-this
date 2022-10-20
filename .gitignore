@@ -179,6 +179,8 @@ testing.ipynb
 images.zip
 *.jpg
 *.tfrec
+.gradle/
+bin/
 .gradle
-bin
-.gradle
+backend/gradle/
+gradle/wrapper/
