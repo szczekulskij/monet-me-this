@@ -17,18 +17,25 @@ import java.util.stream.Collectors;
 @Service
 public class FileStoreService {
 
-    Path monetPhotosLocation = Paths.get("images/artists/monet/monet_jpg");
-    Path nonMonetPhotosLocation = Paths.get("images/random_images/photo_jpg");
+    Path originalMonetPhotosLocation = Paths.get("images/artists/monet/monet_jpg");
+    Path generatedMonetPhotosLocation = Paths.get("images/artists/monet/monet_generated");
+    Path randomImagesPhotosLocation = Paths.get("images/random_images/photo_jpg");
     
 
-    public Resource loadImage(boolean isMonet) {
+    // public Resource generateImage(String artist) {
+    //     return ;
+    // }
+
+    public Resource loadImage(String artist, boolean original) {
+
+        Path file;
+        if (artist.equals("monet") && original){ file = randomFileNameGenerator(originalMonetPhotosLocation); }
+        else if (artist.equals("monet") && !original){ file = randomFileNameGenerator(generatedMonetPhotosLocation); }
+        else if (artist.equals("none")){ file = randomFileNameGenerator(randomImagesPhotosLocation); }
+        else {throw new RuntimeException("Wrong artist provided!");}
+
         try {
-
-            Path file;
-            if (isMonet){ file = randomFileNameGenerator(monetPhotosLocation); }
-            else { file = randomFileNameGenerator(nonMonetPhotosLocation); }
             Resource resource = new UrlResource(file.toUri());
-
             if (resource.exists() || resource.isReadable()) {
                 return resource;
             } else {

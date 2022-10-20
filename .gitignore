@@ -167,9 +167,18 @@ build/
 ### Non-auto generated
 .DS_Store
 /frontend/node_modules
-/backend/bin
 /backend/build
+/backend/bin
+/backend/.gradle
+
+backend/build
+backend/bin
+backend/.gradle
+
 testing.ipynb
 images.zip
 *.jpg
 *.tfrec
+.gradle
+bin
+.gradle

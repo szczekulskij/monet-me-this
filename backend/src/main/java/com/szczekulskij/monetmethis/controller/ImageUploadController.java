@@ -21,20 +21,26 @@ import com.szczekulskij.monetmethis.service.FileStoreService;
 
 
 @RestController
-@RequestMapping("/fileDownload")
+@RequestMapping("/images")
 public class ImageUploadController {
 
     @Autowired
     FileStoreService fileStoreService;
 
-    @GetMapping(value = "/randomNonMonet", produces = MediaType.IMAGE_JPEG_VALUE)
+    @GetMapping(value = "/image", produces = MediaType.IMAGE_JPEG_VALUE)
     public ResponseEntity<Resource> randomNonMonet(){
-        Resource file = fileStoreService.loadImage(false);
+        Resource file = fileStoreService.loadImage("none", false);
         return ResponseEntity.ok().header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + file.getFilename() + "\"").body(file);
     }
-    @GetMapping(value = "/randomMonet", produces = MediaType.IMAGE_JPEG_VALUE)
+    @GetMapping(value = "/monet/original", produces = MediaType.IMAGE_JPEG_VALUE)
     public ResponseEntity<Resource> randomMonet(){
-        Resource file = fileStoreService.loadImage(true);
+        Resource file = fileStoreService.loadImage("monet", true);
+        return ResponseEntity.ok().header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + file.getFilename() + "\"").body(file);
+    }
+
+    @GetMapping(value = "/monet/generated", produces = MediaType.IMAGE_JPEG_VALUE)
+    public ResponseEntity<Resource> randomMonetsque(){
+        Resource file = fileStoreService.loadImage("monet", false);
         return ResponseEntity.ok().header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + file.getFilename() + "\"").body(file);
     }
 
