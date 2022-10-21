@@ -17,7 +17,7 @@ import org.apache.commons.io.IOUtils;
 import java.nio.file.Paths;
 import java.nio.file.Path;
 
-import com.szczekulskij.monetmethis.service.FileStoreService;
+import com.szczekulskij.monetmethis.service.FileLoadingService;
 
 
 @RestController
@@ -25,22 +25,22 @@ import com.szczekulskij.monetmethis.service.FileStoreService;
 public class ImageUploadController {
 
     @Autowired
-    FileStoreService fileStoreService;
+    FileLoadingService fileLoadingService;
 
     @GetMapping(value = "/image", produces = MediaType.IMAGE_JPEG_VALUE)
     public ResponseEntity<Resource> randomNonMonet(){
-        Resource file = fileStoreService.loadImage("none", false);
+        Resource file = fileLoadingService.loadImage("none", false);
         return ResponseEntity.ok().header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + file.getFilename() + "\"").body(file);
     }
     @GetMapping(value = "/monet/original", produces = MediaType.IMAGE_JPEG_VALUE)
     public ResponseEntity<Resource> randomMonet(){
-        Resource file = fileStoreService.loadImage("monet", true);
+        Resource file = fileLoadingService.loadImage("monet", true);
         return ResponseEntity.ok().header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + file.getFilename() + "\"").body(file);
     }
 
     @GetMapping(value = "/monet/generated", produces = MediaType.IMAGE_JPEG_VALUE)
     public ResponseEntity<Resource> randomMonetsque(){
-        Resource file = fileStoreService.loadImage("monet", false);
+        Resource file = fileLoadingService.loadImage("monet", false);
         return ResponseEntity.ok().header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + file.getFilename() + "\"").body(file);
     }
 

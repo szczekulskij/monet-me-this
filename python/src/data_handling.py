@@ -1,5 +1,5 @@
 import tensorflow as tf
-from src.config import (BATCH_SIZE, AUTOTUNE, IMAGE_SIZE, SIZE_RESIZE)
+from python.src.config import (BATCH_SIZE, AUTOTUNE, IMAGE_SIZE, SIZE_RESIZE)
 
 def load_dataset(filenames, apply_jitter=False, repeat=True, shuffle=True, batch_size=BATCH_SIZE):
     dataset = tf.data.TFRecordDataset(filenames)
