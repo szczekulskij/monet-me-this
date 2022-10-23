@@ -1,11 +1,15 @@
-from requests import request
-from flask import Flask
+import matplotlib
+from flask import Flask, request, Response, send_file
+import cv2
 import re
 import tensorflow as tf
 from tensorflow import keras
 from tensorflow.keras import layers
 import tensorflow_addons as tfa
+from tensorflow.keras.utils import save_img
 from tensorflow.keras.layers import Layer
+from PIL import Image
+import matplotlib.pyplot as plt
 
 import matplotlib.pyplot as plt
 import warnings
@@ -18,7 +22,12 @@ from python.src.config import STRATEGY as strategy
 from python.src.config import (BATCH_SIZE, IMAGE_SIZE, BATCH_SIZE, SIZE_RESIZE, AUTOTUNE, EPOCHS)
 
 def transform_image(image):
+
     # a = tf.keras.preprocessing.image.load_img(image_path)
+    # Transform image to 256x256x3 !!
+    # Transform image to 256x256x3 !!
+    # Transform image to 256x256x3 !!
+
     a = tf.keras.preprocessing.image.img_to_array(image)
     a = tf.keras.preprocessing.image.img_to_array(a) 
     a = (tf.cast(a, tf.float32) / 127.5) - 1
@@ -44,18 +53,15 @@ def healthcheck():
 #     plt.imshow(output[0])
 #     return 0
 
-@app.route("/generate/image", methods=['POST'])
+@app.route("/generate/image/monet", methods=['POST'])
 def generate_img_based_on_img():
-    image = request.form['image']
+    image_file = request.files['image']
+    image = Image.open(image_file.stream)
     image = transform_image(image)
-    artist = request.form['artist']
-    if artist == "monet":
-        return monet_generator(image)[0]
-    # elif artist == "vangogh":
-    #     return vanGogh_generator(image)[0]
-    else :
-        raise Exception("wrong arist name")
+    generated_image_tensor = monet_generator(image)[0]
+    save_img("python/flask_backend/temp.jpg", generated_image_tensor)
+    return send_file("temp.jpg")
 
 
 if __name__ == "__main__":
-    app.run()
+    app.run(port=5000, debug = True)
