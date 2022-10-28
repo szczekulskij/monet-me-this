@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom"
+
 export const Navigation = (props) => {
   return (
     <nav id='menu' className='navbar navbar-default navbar-fixed-top'>
@@ -26,10 +28,14 @@ export const Navigation = (props) => {
         >
           <ul className='nav navbar-nav navbar-right'>
             <li>
-              <a> Artist's history </a>
+              <Link to={`/monet/history`}> 
+                Artist's history 
+              </Link>
             </li>
             <li>
-              <a> Artist's painting generator </a>
+              <Link to={`/monet/generator`}>
+                Artist's painting generator 
+              </Link>
             </li>
             <li>
               <a> Choose artist </a>
