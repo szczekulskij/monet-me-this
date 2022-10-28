@@ -5,7 +5,7 @@ export const Header = (props) => {
   const [url, setUrl] = useState(0);
   
   const componentDidMount = async () =>{
-    const backend_url = "http://localhost:8080/fileDownload/randomNonMonet"
+    const backend_url = "http://localhost:8080/images/image"
     const res = await axios.get(backend_url, {responseType: 'blob'})
     const image_url = URL.createObjectURL(res.data)
     setUrl(image_url)
