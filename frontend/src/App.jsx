@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
-import { Navigation } from "./components/navigation/Navigation";
-import Navigation2 from "./components/navigation/Navigation2";
+import Navigation from "./components/Navigation";
 import Home from "./components/home/Home"
 import ImageGenerator from "./components/ImageGenerator"
 import History from "./components/History"
@@ -22,7 +21,7 @@ const App = () => {
 
   return (
     <Router>
-      <Navigation2 />
+      <Navigation/>
       <Routes>
         <Route exact path="/" element = {<Home/>}/>
         <Route exact path="/monet/history" element = {<History/>}/>
