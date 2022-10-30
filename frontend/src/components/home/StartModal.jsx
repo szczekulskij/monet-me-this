@@ -1,5 +1,22 @@
 import React, { Component } from 'react'
-import { Button, Header, Image, Modal } from 'semantic-ui-react'
+import { Button, Header, Image, Modal, Popup } from 'semantic-ui-react'
+import { BsFillQuestionSquareFill } from 'react-icons/bs';
+
+
+
+const PopupExample = () => (
+  <Popup 
+    content='Hardcore mode explenation' 
+    trigger={
+      <Button> 
+        <BsFillQuestionSquareFill style= {{height: "20px", width: "20px"}}/>
+      </Button>
+      } 
+  />
+)
+
+
+
 
 class DifficultyToggle extends Component {
   state = {}
@@ -33,14 +50,19 @@ function StartModal() {
       <Modal.Content image>
         <Modal.Description>
           <p> Game explenation text or whatever </p>
-          <DifficultyToggle></DifficultyToggle>
+          <div style = {{display: "flex", overflow: "auto"}}>
+            <DifficultyToggle/>
+            <div>
+              <PopupExample/>
+            </div>
+          </div>
         </Modal.Description>
       </Modal.Content>
       <Modal.Actions>
         <Button
           content="Start Game"
           labelPosition='right'
-          icon='checkmark'
+          icon='play'
           onClick={() => setOpen(false)}
           positive
         />
