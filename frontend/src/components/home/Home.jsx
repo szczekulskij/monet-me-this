@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { Menu } from 'semantic-ui-react'
 import StartModal from "./StartModal"
+import TutorialModal from "./TutorialModal"
 
 
 export default class Navigation2 extends Component {
@@ -20,13 +21,16 @@ export default class Navigation2 extends Component {
                   onClick={this.handleItemClick}
                   style={{ fontSize: "25px", width: "75%", textAlign: "center", display: "inline-block" }} >
                   <StartModal/>
-                  </Menu.Item>
+              </Menu.Item>
                 
               <Menu.Item
                   name="Tutorial"
                   active={activeItem === "Monet's history"}
                   onClick={this.handleItemClick}
-                  style={{ width: "25%", textAlign: "center", display: "inline-block", paddingTop: "25px" }} />
+                  style={{ width: "25%", textAlign: "center", display: "inline-block", paddingTop: "25px" }}>
+                  <TutorialModal/>
+              </Menu.Item>
+                
           </Menu>
           
           <div style = {{display: "flex", overflow: "auto"}}>

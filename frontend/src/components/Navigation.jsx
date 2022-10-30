@@ -3,6 +3,7 @@ import { Menu } from 'semantic-ui-react'
 import { Link } from "react-router-dom"
 import { Dropdown } from 'semantic-ui-react'
 
+
 const artist_options = [
     { key: 1, text: 'Monet', value: 1 },
     { key: 2, text: 'VanGogh', value: 2 },
