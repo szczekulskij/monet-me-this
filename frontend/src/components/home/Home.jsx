@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import { Menu } from 'semantic-ui-react'
-import { Link } from "react-router-dom"
-import { Dropdown } from 'semantic-ui-react'
+import StartModal from "./StartModal"
 
 
 export default class Navigation2 extends Component {
@@ -19,7 +18,10 @@ export default class Navigation2 extends Component {
               <Menu.Item header
                   name="Start"
                   onClick={this.handleItemClick}
-                  style={{ fontSize: "25px", width: "75%", textAlign: "center", display: "inline-block" }} />
+                  style={{ fontSize: "25px", width: "75%", textAlign: "center", display: "inline-block" }} >
+                  <StartModal/>
+                  </Menu.Item>
+                
               <Menu.Item
                   name="Tutorial"
                   active={activeItem === "Monet's history"}

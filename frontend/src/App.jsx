@@ -3,17 +3,13 @@ import Navigation from "./components/Navigation";
 import Home from "./components/home/Home"
 import ImageGenerator from "./components/ImageGenerator"
 import History from "./components/History"
-import { About } from "./components/deprecated/about";
-
-
-import JsonData from "./data/data.json";
-import SmoothScroll from "smooth-scroll";
 import {
   BrowserRouter as Router,
   Routes,
   Route,
   Link,
 } from "react-router-dom";
+
 import "./App.css";
 
 
