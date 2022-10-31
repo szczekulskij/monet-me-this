@@ -35,9 +35,9 @@ export default class Navigation2 extends Component {
           
           <div style = {{display: "flex", overflow: "auto"}}>
             {/* <h2>Hello</h2> */}
-            <img src="img/about.jpg" style={{display: "block", width: "29.85%",  marginLeft: "auto", }}/> 
+            <img src="img/before.jpg" style={{display: "block", width: "29.85%",  marginLeft: "auto", }}/> 
             <div style = {{borderLeft: "2px solid black", height: "100%", borderRight: "2px solid black"}}/>
-            <img src="img/about.jpg" style={{display: "block", width: "29.85%", marginRight: "auto"}}/> 
+            <img src="img/before.jpg" style={{display: "block", width: "29.85%", marginRight: "auto"}}/> 
           </div>
           </>
 
