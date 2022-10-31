@@ -32,11 +32,15 @@ export default class Navigation2 extends Component {
               </Menu.Item>
                 
           </Menu>
+          <div className="ui progress" data-percent="75" style={{width: "60%", margin: "0 0 0 0",  marginLeft: "20%", paddingTop: "0px", paddingBottom:"0px"}}>  
+          <div className="bar" style={{width:"75%"}}>
+            <div className="progress">Score: 4/5</div>
+          </div>
+        </div>
           
-          <div style = {{display: "flex", overflow: "auto"}}>
-            {/* <h2>Hello</h2> */}
+          <div style = {{display: "flex", overflow: "auto", paddingTop: "0px", margingTop: "0px"}}>
             <img src="img/before.jpg" style={{display: "block", width: "29.85%",  marginLeft: "auto", }}/> 
-            <div style = {{borderLeft: "2px solid black", height: "100%", borderRight: "2px solid black"}}/>
+            <div style = {{borderLeft: "2px solid black", borderRight: "2px solid black"}}/>
             <img src="img/before.jpg" style={{display: "block", width: "29.85%", marginRight: "auto"}}/> 
           </div>
           </>

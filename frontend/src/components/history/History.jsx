@@ -3,6 +3,7 @@ import React, { Component } from 'react'
 const ReactDOMServer = require('react-dom/server');
 const HtmlToReactParser = require('html-to-react').Parser;
 
+
 const rawHTML = `
 <body>
 <script>
