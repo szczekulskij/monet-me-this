@@ -58,9 +58,13 @@ export default class Navigation2 extends Component {
             <Dropdown text='Choose Language' options={language_options} simple item />
         </Menu.Item>
         <Menu.Item
+            // as={Link} to='https://github.com/szczekulskij/monet-me-this'
             name='github'
+            onclick="window.location.href=https://github.com/szczekulskij/monet-me-this;"
             onClick={this.handleItemClick}
-        />
+        >
+          <a style={{color: "inherit"}} target="_blank" href='https://github.com/szczekulskij/monet-me-this'>GitHub</a>
+        </Menu.Item>
       </Menu>
     )
   }
