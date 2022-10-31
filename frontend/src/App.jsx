@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import Navigation from "./components/Navigation";
 import Home from "./components/home/Home"
 import ImageGenerator from "./components/generator/ImageGenerator"
-import History from "./components/History"
+import History from "./components/history/History"
 import {
   BrowserRouter as Router,
   Routes,
