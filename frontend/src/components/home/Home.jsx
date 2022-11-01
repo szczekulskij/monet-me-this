@@ -2,6 +2,20 @@ import React, { Component } from 'react'
 import { Menu } from 'semantic-ui-react'
 import StartModal from "./StartModal"
 import TutorialModal from "./TutorialModal"
+import {useState} from "react";
+import axios from 'axios';
+
+  // return (
+  //   <header id='header'>
+  //     <div className='intro'>
+  //       <div className='overlay'>
+  //         <div className='container'>
+  //           <div className='row'>
+  //             <div className='col-md-8 col-md-offset-2 intro-text'>
+  //               <a
+  //                 href='#features'
+  //                 className='btn btn-custom btn-lg page-scroll'
+  //                 onClick={() => componentDidMount()}
 
 
 export default class Navigation2 extends Component {
@@ -10,6 +24,33 @@ export default class Navigation2 extends Component {
     handleItemClick = (e, { name }) => this.setState({ activeItem: name })
   
     render() {
+      const getImage = async (image_type) =>{
+
+        
+        const backend_url = "" // So that js doesn't scream
+        if (image_type === 'monetsque'){
+          const backend_url = "http://localhost:8080/images/monet/original"
+        }
+        if (image_type === 'monet'){
+          const backend_url = "http://localhost:8080/images/monet/generated"
+        }
+        if (image_type === 'normal'){
+          const backend_url = "http://localhost:8080/images/image"
+        }
+      
+      
+      
+
+        const res = await axios.get(backend_url, {responseType: 'blob'})
+        const image_url = URL.createObjectURL(res.data)
+        console.log(image_url)
+        // setUrl(image_url)
+      }
+
+
+
+      // const [url, setUrl] = this.useState(0);
+      this.state = { url: false };
       const { activeItem } = this.state
   
       return (
@@ -43,6 +84,7 @@ export default class Navigation2 extends Component {
             <div style = {{borderLeft: "2px solid black", borderRight: "2px solid black"}}/>
             <img src="img/before.jpg" style={{display: "block", width: "29.85%", marginRight: "auto"}}/> 
           </div>
+          <button class="ui button">Click Here</button>
           </>
 
       )
