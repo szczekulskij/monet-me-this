@@ -14,14 +14,21 @@ export default class Navigation2 extends Component {
              percentage : 100,
              correctPicture : null}
 
-    calculateScore = () => {
-      if (this.total==0) {
+
+    calculatePercentage = () => {
+      if (this.state.total==0) {
         this.setState({percentage: 0 })
       }
-      let pct = this.score/this.total * 100
+      let pct = this.state.score/this.state.total * 100
       this.setState({percentage: pct }) 
     }
-    updateBothImages = async (hardcore_level = false) =>{
+
+
+    updateBothImages = async (pic_clicked) =>{ 
+      
+      
+      // hardcore level can be implemented in here
+      let hardcore_level = false
 
       if (!hardcore_level){
         if (Math.floor(Math.random() * 2) == 1){
@@ -35,8 +42,10 @@ export default class Navigation2 extends Component {
           }
         }
         this.setState({total: this.state.total+1 }) 
-        this.calculateScore()
+        this.calculatePercentage()
+        if (pic_clicked == this.state.correctPicture) { this.setState({score: this.state.score+1 })  }
         console.log("correctPicture:", this.state.correctPicture)
+        console.log("percentage: ", this.state.percentage)
 
       }
     
@@ -99,14 +108,14 @@ export default class Navigation2 extends Component {
           <div style = {{display: "flex", overflow: "auto", paddingTop: "0px", margingTop: "0px"}}>
             <img 
               active={activeItem === "Monet's history"}
-              onClick={() => this.updateBothImages()} 
+              onClick={() => this.updateBothImages(1)} 
               src={this.state.url1} 
               style={{display: "block", width: "29.85%",  marginLeft: "auto", } }
             /> 
             <div style = {{borderLeft: "2px solid black", borderRight: "2px solid black"}}/>
             <img 
             active={activeItem === "Monet's history"}
-            onClick={() => this.updateBothImages()} 
+            onClick={() => this.updateBothImages(2)} 
               src={this.state.url2} 
               style={{display: "block", width: "29.85%", marginRight: "auto"}}
             /> 
