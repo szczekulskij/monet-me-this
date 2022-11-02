@@ -10,6 +10,23 @@ export default class Navigation2 extends Component {
              url1: "img/before.jpg",
              url2: "img/after.jpg"}
 
+    updateBothImages = async (hardcore_level = false) =>{
+      if (!hardcore_level){
+        if (Math.floor(Math.random() * 2) == 1){
+          this.updateImage("monet", 1)
+          this.updateImage("monetsque", 2)
+        } else {
+          if (Math.floor(Math.random() * 2) == 1){
+            this.updateImage("monet", 2)
+            this.updateImage("monetsque", 1)
+          }
+        }
+
+      } else if (hardcore_level){
+        // ... Implement hardcore level ...
+      }
+    }
+    
     updateImage = async (image_type, url_nr) => {
       let backend_url = "" // So that JS doesn't complain
       if (image_type == 'monetsque'){
@@ -68,14 +85,14 @@ export default class Navigation2 extends Component {
           
           <div style = {{display: "flex", overflow: "auto", paddingTop: "0px", margingTop: "0px"}}>
             <img 
-              onClick={() => this.updateImage("monetsque", 1)} 
+              onClick={() => this.updateBothImages()} 
               src={this.state.url1} 
               style={{display: "block", width: "29.85%",  marginLeft: "auto", } }
             /> 
             <div style = {{borderLeft: "2px solid black", borderRight: "2px solid black"}}/>
             <img 
             active={activeItem === "Monet's history"}
-            onClick={() => this.updateImage("monet", 2)} 
+            onClick={() => this.updateBothImages()} 
               src={this.state.url2} 
               style={{display: "block", width: "29.85%", marginRight: "auto"}}
             /> 
