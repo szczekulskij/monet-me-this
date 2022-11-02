@@ -5,52 +5,37 @@ import TutorialModal from "./TutorialModal"
 import {useState} from "react";
 import axios from 'axios';
 
-  // return (
-  //   <header id='header'>
-  //     <div className='intro'>
-  //       <div className='overlay'>
-  //         <div className='container'>
-  //           <div className='row'>
-  //             <div className='col-md-8 col-md-offset-2 intro-text'>
-  //               <a
-  //                 href='#features'
-  //                 className='btn btn-custom btn-lg page-scroll'
-  //                 onClick={() => componentDidMount()}
-
-
 export default class Navigation2 extends Component {
     state = {}
   
     handleItemClick = (e, { name }) => this.setState({ activeItem: name })
+
+    updateImage = async (image_type, url_nr) => {
+      let backend_url = "" // So that JS doesn't complain
+      if (image_type == 'monetsque'){
+        backend_url = "http://localhost:8080/images/monet/original"
+      }
+      if (image_type == 'monet'){
+        backend_url = "http://localhost:8080/images/monet/generated"
+      }
+      if (image_type == 'normal'){
+        backend_url = "http://localhost:8080/images/image"
+      }
+  
+      const res = await axios.get(backend_url, {responseType: 'blob'})
+      const image_url = URL.createObjectURL(res.data)
+
+      if (url_nr==1){this.setState({url1: image_url })}
+      if (url_nr==2){this.setState({url2: image_url })}
+    }
+
+    // updateImage = async()=>{
+
+    // }
   
     render() {
-      const getImage = async (image_type) =>{
 
-        // const backend_url = ""
-        const backend_url = "http://localhost:8080/images/monet/original" // So that js doesn't scream
-        if (image_type === 'monetsque'){
-          const backend_url = "http://localhost:8080/images/monet/original"
-        }
-        if (image_type === 'monet'){
-          const backend_url = "http://localhost:8080/images/monet/generated"
-        }
-        if (image_type === 'normal'){
-          const backend_url = "http://localhost:8080/images/image"
-        }
-      
-
-        const res = await axios.get(backend_url, {responseType: 'blob'})
-        const image_url = URL.createObjectURL(res.data)
-        console.log(image_url)
-        this.state.url = image_url
-        // setUrl(image_url)
-      }
-
-
-
-      // const [url, setUrl] = this.useState(0);
-      this.state = { url: false };
-      const { activeItem } = this.state
+      const { activeItem , url1, url2} = this.state
   
       return (
         <>
@@ -79,12 +64,12 @@ export default class Navigation2 extends Component {
         </div>
           
           <div style = {{display: "flex", overflow: "auto", paddingTop: "0px", margingTop: "0px"}}>
-            <img src="img/before.jpg" style={{display: "block", width: "29.85%",  marginLeft: "auto", }}/> 
-            <img src={this.state.url} style={{display: "block", width: "29.85%",  marginLeft: "auto", }}/> 
+            <img src={this.state.url1} style={{display: "block", width: "29.85%",  marginLeft: "auto", }}/> 
             <div style = {{borderLeft: "2px solid black", borderRight: "2px solid black"}}/>
-            <img src="img/before.jpg" style={{display: "block", width: "29.85%", marginRight: "auto"}}/> 
+            <img src={this.state.url2} style={{display: "block", width: "29.85%", marginRight: "auto"}}/> 
           </div>
-          <button onClick={getImage} class="ui button">Click Here</button>
+          <button onClick={() => this.updateImage("monetsque", 1)}  class="ui button">Click Here</button>
+          <button onClick={() => this.updateImage("monet", 2)}  class="ui button">Click Here</button>
           </>
 
       )
