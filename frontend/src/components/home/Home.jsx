@@ -8,24 +8,37 @@ import axios from 'axios';
 export default class Navigation2 extends Component {
     state = {activeItem : false,
              url1: "img/before.jpg",
-             url2: "img/after.jpg"}
+             url2: "img/after.jpg",
+             score : 0,
+             total: 0,
+             percentage : 100,
+             correctPicture : null}
 
+    calculateScore = () => {
+      if (this.total==0) {
+        this.setState({percentage: 0 })
+      }
+      let pct = this.score/this.total * 100
+      this.setState({percentage: pct }) 
+    }
     updateBothImages = async (hardcore_level = false) =>{
+
       if (!hardcore_level){
         if (Math.floor(Math.random() * 2) == 1){
-          this.updateImage("monet", 1)
-          this.updateImage("monetsque", 2)
+          await this.updateImage("monet", 1)
+          await this.updateImage("monetsque", 2)
+          this.setState({correctPicture: 1 })
         } else {
-          if (Math.floor(Math.random() * 2) == 1){
-            this.updateImage("monet", 2)
-            this.updateImage("monetsque", 1)
+          await this.updateImage("monet", 2)
+          await this.updateImage("monetsque", 1)
+          this.setState({correctPicture: 2 })
           }
         }
+        this.setState({total: this.state.total+1 }) 
+        this.calculateScore()
+        console.log("correctPicture:", this.state.correctPicture)
 
-      } else if (hardcore_level){
-        // ... Implement hardcore level ...
       }
-    }
     
     updateImage = async (image_type, url_nr) => {
       let backend_url = "" // So that JS doesn't complain
@@ -40,7 +53,7 @@ export default class Navigation2 extends Component {
       }
   
       const res = await axios.get(backend_url, {responseType: 'blob'})
-      const image_url = URL.createObjectURL(res.data)
+      const image_url = await URL.createObjectURL(res.data)
 
       if (url_nr==0){return image_url}
       if (url_nr==1){this.setState({url1: image_url })}
@@ -55,7 +68,7 @@ export default class Navigation2 extends Component {
     render() {
 
 
-      const { activeItem , url1, url2} = this.state
+      const { activeItem , url1, url2, score} = this.state
   
       return (
         <>
@@ -78,13 +91,14 @@ export default class Navigation2 extends Component {
                 
           </Menu>
           <div className="ui progress" data-percent="75" style={{width: "60%", margin: "0 0 0 0",  marginLeft: "20%", paddingTop: "0px", paddingBottom:"0px"}}>  
-          <div className="bar" style={{width:"75%"}}>
-            <div className="progress">Score: 4/5</div>
+          <div className="bar" style={{width:`${this.state.percentage }%`}}>
+            <div className="progress">Score: {this.state.score}/{this.state.total}</div>
           </div>
         </div>
           
           <div style = {{display: "flex", overflow: "auto", paddingTop: "0px", margingTop: "0px"}}>
             <img 
+              active={activeItem === "Monet's history"}
               onClick={() => this.updateBothImages()} 
               src={this.state.url1} 
               style={{display: "block", width: "29.85%",  marginLeft: "auto", } }
@@ -97,10 +111,6 @@ export default class Navigation2 extends Component {
               style={{display: "block", width: "29.85%", marginRight: "auto"}}
             /> 
           </div>
-
-
-          {/* <button onClick={() => this.updateImage("monetsque", 1)}  class="ui button">Click Here</button>
-          <button onClick={() => this.updateImage("monet", 2)}  class="ui button">Click Here</button> */}
           </>
 
       )
