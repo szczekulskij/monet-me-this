@@ -2,13 +2,13 @@ import React, { Component } from 'react'
 import { Menu } from 'semantic-ui-react'
 import StartModal from "./StartModal"
 import TutorialModal from "./TutorialModal"
-import {useState} from "react";
+import {useState, useEffect} from "react";
 import axios from 'axios';
 
 export default class Navigation2 extends Component {
-    state = {}
-  
-    handleItemClick = (e, { name }) => this.setState({ activeItem: name })
+    state = {activeItem : false,
+             url1: "img/before.jpg",
+             url2: "img/after.jpg"}
 
     updateImage = async (image_type, url_nr) => {
       let backend_url = "" // So that JS doesn't complain
@@ -25,15 +25,18 @@ export default class Navigation2 extends Component {
       const res = await axios.get(backend_url, {responseType: 'blob'})
       const image_url = URL.createObjectURL(res.data)
 
+      if (url_nr==0){return image_url}
       if (url_nr==1){this.setState({url1: image_url })}
       if (url_nr==2){this.setState({url2: image_url })}
     }
 
-    // updateImage = async()=>{
+    handleItemClick = (e, { name }) => this.setState({ activeItem: name })
 
-    // }
-  
+    
+    // setState({url1: this.updateImage('monetsque') })
+    // setState({url1: this.updateImage('monetsque') })
     render() {
+
 
       const { activeItem , url1, url2} = this.state
   
@@ -64,12 +67,23 @@ export default class Navigation2 extends Component {
         </div>
           
           <div style = {{display: "flex", overflow: "auto", paddingTop: "0px", margingTop: "0px"}}>
-            <img src={this.state.url1} style={{display: "block", width: "29.85%",  marginLeft: "auto", }}/> 
+            <img 
+              onClick={() => this.updateImage("monetsque", 1)} 
+              src={this.state.url1} 
+              style={{display: "block", width: "29.85%",  marginLeft: "auto", } }
+            /> 
             <div style = {{borderLeft: "2px solid black", borderRight: "2px solid black"}}/>
-            <img src={this.state.url2} style={{display: "block", width: "29.85%", marginRight: "auto"}}/> 
+            <img 
+            active={activeItem === "Monet's history"}
+            onClick={() => this.updateImage("monet", 2)} 
+              src={this.state.url2} 
+              style={{display: "block", width: "29.85%", marginRight: "auto"}}
+            /> 
           </div>
-          <button onClick={() => this.updateImage("monetsque", 1)}  class="ui button">Click Here</button>
-          <button onClick={() => this.updateImage("monet", 2)}  class="ui button">Click Here</button>
+
+
+          {/* <button onClick={() => this.updateImage("monetsque", 1)}  class="ui button">Click Here</button>
+          <button onClick={() => this.updateImage("monet", 2)}  class="ui button">Click Here</button> */}
           </>
 
       )
