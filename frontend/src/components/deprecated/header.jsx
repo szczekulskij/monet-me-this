@@ -8,6 +8,7 @@ export const Header = (props) => {
     const backend_url = "http://localhost:8080/images/image"
     const res = await axios.get(backend_url, {responseType: 'blob'})
     const image_url = URL.createObjectURL(res.data)
+    console.log(image_url)
     setUrl(image_url)
   }
 

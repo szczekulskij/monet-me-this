@@ -26,8 +26,8 @@ export default class Navigation2 extends Component {
     render() {
       const getImage = async (image_type) =>{
 
-        
-        const backend_url = "" // So that js doesn't scream
+        // const backend_url = ""
+        const backend_url = "http://localhost:8080/images/monet/original" // So that js doesn't scream
         if (image_type === 'monetsque'){
           const backend_url = "http://localhost:8080/images/monet/original"
         }
@@ -38,12 +38,11 @@ export default class Navigation2 extends Component {
           const backend_url = "http://localhost:8080/images/image"
         }
       
-      
-      
 
         const res = await axios.get(backend_url, {responseType: 'blob'})
         const image_url = URL.createObjectURL(res.data)
         console.log(image_url)
+        this.state.url = image_url
         // setUrl(image_url)
       }
 
@@ -81,10 +80,11 @@ export default class Navigation2 extends Component {
           
           <div style = {{display: "flex", overflow: "auto", paddingTop: "0px", margingTop: "0px"}}>
             <img src="img/before.jpg" style={{display: "block", width: "29.85%",  marginLeft: "auto", }}/> 
+            <img src={this.state.url} style={{display: "block", width: "29.85%",  marginLeft: "auto", }}/> 
             <div style = {{borderLeft: "2px solid black", borderRight: "2px solid black"}}/>
             <img src="img/before.jpg" style={{display: "block", width: "29.85%", marginRight: "auto"}}/> 
           </div>
-          <button class="ui button">Click Here</button>
+          <button onClick={getImage} class="ui button">Click Here</button>
           </>
 
       )
