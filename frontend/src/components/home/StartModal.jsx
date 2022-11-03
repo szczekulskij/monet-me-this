@@ -36,7 +36,7 @@ class DifficultyToggle extends Component {
 
 
 
-function StartModal() {
+function StartModal(props) {
   const [open, setOpen] = React.useState(false)
 
   return (
@@ -63,7 +63,8 @@ function StartModal() {
           content="Start Game"
           labelPosition='right'
           icon='play'
-          onClick={() => setOpen(false)}
+          onClick={() => {setOpen(false); props.startGame();}}
+          // onClick={() => props.startGame}
           positive
         />
       </Modal.Actions>

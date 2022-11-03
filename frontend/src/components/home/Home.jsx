@@ -12,7 +12,8 @@ export default class Navigation2 extends Component {
              score : 0,
              total: 0,
              percentage : 100,
-             correctPicture : null}
+             correctPicture : null,
+             clickableImage : "none"} // re-set to auto
 
 
     calculatePercentage = () => {
@@ -23,6 +24,16 @@ export default class Navigation2 extends Component {
       this.setState({percentage: pct }) 
     }
 
+    startGame = ()=>{
+      this.setState({
+        clickableImage: "auto",
+        score : 0,
+        total: 0,
+        percentage : 100,
+        correctPicture : null,
+
+      }) 
+    }
 
     updateBothImages = async (pic_clicked) =>{ 
       
@@ -72,8 +83,6 @@ export default class Navigation2 extends Component {
     handleItemClick = (e, { name }) => this.setState({ activeItem: name })
 
     
-    // setState({url1: this.updateImage('monetsque') })
-    // setState({url1: this.updateImage('monetsque') })
     render() {
 
 
@@ -87,7 +96,7 @@ export default class Navigation2 extends Component {
                   name="Start"
                   onClick={this.handleItemClick}
                   style={{ fontSize: "25px", width: "75%", textAlign: "center", display: "inline-block" }} >
-                  <StartModal/>
+                  <StartModal startGame={this.startGame}/>
               </Menu.Item>
                 
               <Menu.Item
@@ -110,14 +119,14 @@ export default class Navigation2 extends Component {
               active={activeItem === "Monet's history"}
               onClick={() => this.updateBothImages(1)} 
               src={this.state.url1} 
-              style={{display: "block", width: "29.85%",  marginLeft: "auto", } }
+              style={{display: "block", width: "29.85%",  marginLeft: "auto", pointerEvents: `${this.state.clickableImage}`} }
             /> 
             <div style = {{borderLeft: "2px solid black", borderRight: "2px solid black"}}/>
             <img 
             active={activeItem === "Monet's history"}
             onClick={() => this.updateBothImages(2)} 
               src={this.state.url2} 
-              style={{display: "block", width: "29.85%", marginRight: "auto"}}
+              style={{display: "block", width: "29.85%", marginRight: "auto", pointerEvents: `${this.state.clickableImage}`}}
             /> 
           </div>
           </>
