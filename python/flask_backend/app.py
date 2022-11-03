@@ -1,5 +1,6 @@
+import os
 import matplotlib
-from flask import Flask, request, Response, send_file
+from flask import Flask, request, Response, send_file, session
 import cv2
 import re
 import tensorflow as tf
@@ -8,8 +9,12 @@ from tensorflow.keras import layers
 import tensorflow_addons as tfa
 from tensorflow.keras.utils import save_img
 from tensorflow.keras.layers import Layer
+from werkzeug.utils import secure_filename
+
 from PIL import Image
 import matplotlib.pyplot as plt
+from flask_cors import CORS, cross_origin
+
 
 import matplotlib.pyplot as plt
 import warnings
@@ -39,6 +44,11 @@ def transform_image(image):
 
 
 app = Flask(__name__)
+cors = CORS(app)
+# UPLOAD_FOLDER ="/upload_folder/"
+# ALLOWED_EXTENSIONS = set(['txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'])
+app.config['CORS_HEADERS'] = 'Content-Type'
+# app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 monet_generator = tf.keras.models.load_model('python/saved_models/monet_generator.h5')
 
 @app.route("/healthcheck")
