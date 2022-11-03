@@ -1,8 +1,26 @@
-import React, { Component } from 'react'
+import React, { Component , useState, useEffect} from 'react'
 import { Button, Image, Modal } from 'semantic-ui-react'
 
 function UploadModal() {
-  const [open, setOpen] = React.useState(false)
+  const [open, setOpen] = useState(false)
+  // const [image, setImages] = useState()
+  const [imageURL, setimageURL] = useState("https://react.semantic-ui.com/images/wireframe/image-square.png")
+
+  // useEffect(() =>{
+  //   let newImageURL = URL.createObjectURL(image)
+  //   setimageURL(newImageURL)
+  // }, [image])
+
+
+
+
+  function onImageChange(e) {
+    let file = e.target.files[0]
+    let newImageURL = URL.createObjectURL(file)
+    setimageURL(newImageURL)
+    console.log("imageURL:", imageURL)
+
+  }
 
   return (
     <Modal
@@ -13,8 +31,10 @@ function UploadModal() {
     >
       <Modal.Header>Upload image</Modal.Header>
       <Modal.Content image>
-        <Image size='medium' src='https://react.semantic-ui.com/images/wireframe/image-square.png' wrapped />
+      {/* <input type="file" multiple accept="image/*" onChange={setOpen(false)} /> */}
+        <Image size='medium' src={imageURL} wrapped />
         <Modal.Description>
+        <input type="file" accept="image/*" onChange={onImageChange}/>
           <p>Would you like to upload this image?</p>
         </Modal.Description>
       </Modal.Content>
