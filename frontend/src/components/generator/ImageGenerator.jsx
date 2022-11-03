@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Component } from 'react'
 import { Button, Image, Modal } from 'semantic-ui-react'
 
 function UploadModal() {
@@ -9,7 +9,7 @@ function UploadModal() {
       onClose={() => setOpen(false)}
       onOpen={() => setOpen(true)}
       open={open}
-      trigger={<Button>Show Modal</Button>}
+      trigger={<Button style = {{width: "100%", fontSize: "22px"}}>Upload Image!</Button>}
     >
       <Modal.Header>Upload image</Modal.Header>
       <Modal.Content image>
@@ -28,7 +28,11 @@ function UploadModal() {
   )
 }
 
-const ImageGenerator = (props) => {
+
+
+
+class ImageGenerator extends Component {
+  render() {
     return ( 
     <div>
       <h1 style = {{ width: "100%", textAlign: "center", paddingTop: "20px", height: "80px"}}> Monet's Image Generator </h1>
@@ -38,14 +42,16 @@ const ImageGenerator = (props) => {
           <img src="../img/after.jpg" style = {{width: "40%"}}/>
       </div>
 
-      <div style = {{margin: "auto", width: "20%", paddingTop: "30px"}}>
-        <div class="ui input" style = {{margin: "auto", width: "100%"}}>
-          <input type="file" placeholder="Search..."/>
-          <button class="ui button">Upload</button>
+      <div style = {{margin: "auto", width: "30%", paddingTop: "30px"}}>
+        <div class="ui input" style = {{margin: "auto", padding: "0 0 0 0", width: "100%"}}>
+          {/* <input type="file" placeholder="Search..."/>
+          <button class="ui button">Upload</button> */}
+          <UploadModal></UploadModal>
         </div>
       </div>
     </div>
      );
+  }
 }
  
 export default ImageGenerator;
