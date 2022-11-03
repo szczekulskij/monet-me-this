@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { Menu } from 'semantic-ui-react'
 import StartModal from "./StartModal"
 import TutorialModal from "./TutorialModal"
+import GameFinishModal from "./GameFinishModal"
 import {useState, useEffect} from "react";
 import axios from 'axios';
 
@@ -10,12 +11,16 @@ export default class Navigation2 extends Component {
              url1: "img/before.jpg",
              url2: "img/after.jpg",
              score : 0,
-             total: 0,
+             total: 20,
              played :0,
              percentage : 100,
              correctPicture : null,
-             clickableImage : "none"} // re-set to auto
+             clickableImage : "none",
+             open : false} // this is for game Finished pop-up to be dependent on `open` state
 
+    setOpen = (boolean) => {
+      this.setState({open: boolean})
+    }
 
     calculatePercentage = () => {
       if (this.state.score==0) {
@@ -30,6 +35,7 @@ export default class Navigation2 extends Component {
         clickableImage: "auto",
         score : 0,
         total: total,
+        played : 0,
         percentage : 100,
         correctPicture : null,
 
@@ -62,9 +68,10 @@ export default class Navigation2 extends Component {
         // handle game finishing
         if (this.state.played == this.state.total){
           this.setState({clickableImage : "none"})
+          this.setState({open : true})
           // pop up a finished message w. some animation or sth!
         }
-
+      console.log("total:", this.state.total)
       }
     
     updateImage = async (image_type, url_nr) => {
@@ -90,13 +97,28 @@ export default class Navigation2 extends Component {
     handleItemClick = (e, { name }) => this.setState({ activeItem: name })
 
     
+
+
+
+
+
+
+
+    
     render() {
-
-
       const { activeItem , url1, url2, score} = this.state
   
       return (
         <>
+        <GameFinishModal 
+          open={this.state.open} 
+          setOpen = {this.setOpen} 
+          score = {this.state.score} 
+          total = {this.state.total}
+          startGame = {this.startGame}>
+        </GameFinishModal>
+
+        
         <Menu compact
               style={{ fontSize: "20px", width: "60%", textAlign: "center", marginTop: "50px", marginLeft: "20%", paddingLeft: "0px" }}>
               <Menu.Item header
@@ -108,7 +130,7 @@ export default class Navigation2 extends Component {
                 
               <Menu.Item
                   name="Tutorial"
-                  active={activeItem === "Monet's history"}
+                  // active={activeItem === "Monet's history"}
                   onClick={this.handleItemClick}
                   style={{ width: "25%", textAlign: "center", display: "inline-block", paddingTop: "25px" }}>
                   <TutorialModal/>
@@ -123,14 +145,14 @@ export default class Navigation2 extends Component {
           
           <div style = {{display: "flex", overflow: "auto", paddingTop: "0px", margingTop: "0px"}}>
             <img 
-              active={activeItem === "Monet's history"}
+              // active={activeItem === "Monet's history"}
               onClick={() => this.updateBothImages(1)} 
               src={this.state.url1} 
               style={{display: "block", width: "29.85%",  marginLeft: "auto", pointerEvents: `${this.state.clickableImage}`} }
             /> 
             <div style = {{borderLeft: "2px solid black", borderRight: "2px solid black"}}/>
             <img 
-            active={activeItem === "Monet's history"}
+            // active={activeItem === "Monet's history"}
             onClick={() => this.updateBothImages(2)} 
               src={this.state.url2} 
               style={{display: "block", width: "29.85%", marginRight: "auto", pointerEvents: `${this.state.clickableImage}`}}
