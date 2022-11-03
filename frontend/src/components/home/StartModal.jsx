@@ -47,7 +47,7 @@ function StartModal(props) {
       trigger={<Button>Start</Button>}
     >
       <Modal.Header>Game Settings</Modal.Header>
-      <Modal.Content image>
+      <Modal.Content>
         <Modal.Description>
           <p> Game explenation text or whatever </p>
           <div style = {{display: "flex", overflow: "auto"}}>
@@ -57,6 +57,12 @@ function StartModal(props) {
             </div>
           </div>
         </Modal.Description>
+        <div style = {{marginTop : "30px"}}>
+          <p>Choose number of choices included in the game:</p>
+          <Button content='10' />
+          <Button content='20' />
+          <Button content='30' />
+        </div>
       </Modal.Content>
       <Modal.Actions>
         <Button
@@ -64,7 +70,6 @@ function StartModal(props) {
           labelPosition='right'
           icon='play'
           onClick={() => {setOpen(false); props.startGame();}}
-          // onClick={() => props.startGame}
           positive
         />
       </Modal.Actions>
