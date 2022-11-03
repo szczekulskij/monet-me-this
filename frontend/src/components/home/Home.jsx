@@ -16,7 +16,8 @@ export default class Navigation2 extends Component {
              percentage : 100,
              correctPicture : null,
              clickableImage : "none",
-             open : false} // this is for game Finished pop-up to be dependent on `open` state
+             open : false,
+             barColor : "grey"} // this is for game Finished pop-up to be dependent on `open` state
 
     setOpen = (boolean) => {
       this.setState({open: boolean})
@@ -38,6 +39,7 @@ export default class Navigation2 extends Component {
         played : 0,
         percentage : 100,
         correctPicture : null,
+        barColor : "grey"
 
       }) 
     }
@@ -64,6 +66,15 @@ export default class Navigation2 extends Component {
         this.setState({played: this.state.played+1 })
         console.log("correctPicture:", this.state.correctPicture)
         console.log("percentage: ", this.state.percentage)
+
+        if (this.state.percentage < 30) {
+          this.setState({barColor: "#FFDAB9" })
+        } else if (this.state.percentage < 70) {
+          this.setState({barColor: "#F0E68C" })
+        } else {
+          this.setState({barColor: "#ADFF2F" })
+        }
+
 
         // handle game finishing
         if (this.state.played == this.state.total){
@@ -138,7 +149,7 @@ export default class Navigation2 extends Component {
                 
           </Menu>
           <div className="ui progress" data-percent="75" style={{width: "60%", margin: "0 0 0 0",  marginLeft: "20%", paddingTop: "0px", paddingBottom:"0px"}}>  
-          <div className="bar" style={{width:`${this.state.percentage }%`}}>
+          <div className="bar" style={{width:`${this.state.percentage }%`, backgroundColor: `${this.state.barColor }`}}>
             <div className="progress">Score: {this.state.score}/{this.state.total}</div>
           </div>
         </div>
