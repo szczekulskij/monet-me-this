@@ -38,6 +38,7 @@ class DifficultyToggle extends Component {
 
 function StartModal(props) {
   const [open, setOpen] = React.useState(false)
+  const [total, setTotal] = React.useState(0)
 
   return (
     <Modal
@@ -59,9 +60,9 @@ function StartModal(props) {
         </Modal.Description>
         <div style = {{marginTop : "30px"}}>
           <p>Choose number of choices included in the game:</p>
-          <Button content='10' />
-          <Button content='20' />
-          <Button content='30' />
+          <Button content='10' onClick={() => setTotal(10)}/>
+          <Button content='20' onClick={() => setTotal(20)}/>
+          <Button content='30' onClick={() => setTotal(30)}/>
         </div>
       </Modal.Content>
       <Modal.Actions>
@@ -69,7 +70,7 @@ function StartModal(props) {
           content="Start Game"
           labelPosition='right'
           icon='play'
-          onClick={() => {setOpen(false); props.startGame();}}
+          onClick={() => {setOpen(false); props.startGame(total);}}
           positive
         />
       </Modal.Actions>

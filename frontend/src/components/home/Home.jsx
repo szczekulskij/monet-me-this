@@ -11,24 +11,25 @@ export default class Navigation2 extends Component {
              url2: "img/after.jpg",
              score : 0,
              total: 0,
+             played :0,
              percentage : 100,
              correctPicture : null,
              clickableImage : "none"} // re-set to auto
 
 
     calculatePercentage = () => {
-      if (this.state.total==0) {
-        this.setState({percentage: 0 })
+      if (this.state.score==0) {
+        this.setState({percentage: 20 })
       }
       let pct = this.state.score/this.state.total * 100
       this.setState({percentage: pct }) 
     }
 
-    startGame = ()=>{
+    startGame = (total)=>{
       this.setState({
         clickableImage: "auto",
         score : 0,
-        total: 0,
+        total: total,
         percentage : 100,
         correctPicture : null,
 
@@ -52,11 +53,17 @@ export default class Navigation2 extends Component {
           this.setState({correctPicture: 2 })
           }
         }
-        this.setState({total: this.state.total+1 }) 
         this.calculatePercentage()
-        if (pic_clicked == this.state.correctPicture) { this.setState({score: this.state.score+1 })  }
+        if (pic_clicked == this.state.correctPicture) { this.setState({score: this.state.score+1 }) }
+        this.setState({played: this.state.played+1 })
         console.log("correctPicture:", this.state.correctPicture)
         console.log("percentage: ", this.state.percentage)
+
+        // handle game finishing
+        if (this.state.played == this.state.total){
+          this.setState({clickableImage : "none"})
+          // pop up a finished message w. some animation or sth!
+        }
 
       }
     
