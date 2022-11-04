@@ -27,6 +27,7 @@ public class FileLoadingService {
         if (artist.equals("monet") && original){ file = randomFileNameGenerator(originalMonetPhotosLocation); }
         else if (artist.equals("monet") && !original){ file = randomFileNameGenerator(generatedMonetPhotosLocation); }
         else if (artist.equals("none")){ file = randomFileNameGenerator(randomImagesPhotosLocation); }
+        else if (artist.equals("generated")){file = getGenerated();}
         else {throw new RuntimeException("Wrong artist provided!");}
 
         try {
@@ -51,6 +52,13 @@ public class FileLoadingService {
         // Get random filename
         Path filename = allFiles.get(random);
         return folder_location.resolve(filename);
+    }
+
+    public Path getGenerated(){
+        Path path = Paths.get("images/generated_images");
+        ArrayList<Path> allFiles = loadAllFiles(path);
+        Path filename = allFiles.get(0);
+        return path.resolve(filename);
     }
 
     public ArrayList<Path> loadAllFiles(Path folder_location)  {

@@ -1,6 +1,6 @@
 import os
 import matplotlib
-from flask import Flask, request, Response, send_file, session
+from flask import Flask, request, Response, send_file, session, send_from_directory, redirect, url_for
 import cv2
 import re
 import tensorflow as tf
@@ -45,10 +45,10 @@ def transform_image(image):
 
 app = Flask(__name__)
 cors = CORS(app)
-# UPLOAD_FOLDER ="/upload_folder/"
-# ALLOWED_EXTENSIONS = set(['txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'])
+UPLOAD_FOLDER ="upload_folder"
+ALLOWED_EXTENSIONS = set(['txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'])
 app.config['CORS_HEADERS'] = 'Content-Type'
-# app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 monet_generator = tf.keras.models.load_model('python/saved_models/monet_generator.h5')
 
 @app.route("/healthcheck")
@@ -69,7 +69,7 @@ def generate_img_based_on_img():
     image = Image.open(image_file.stream)
     image = transform_image(image)
     generated_image_tensor = monet_generator(image)[0]
-    save_img("python/flask_backend/temp.jpg", generated_image_tensor)
+    save_img("images/generated_images/temp.jpg", generated_image_tensor)
     return send_file("temp.jpg")
 
 

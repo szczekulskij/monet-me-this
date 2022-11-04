@@ -17,6 +17,7 @@ monet paiting comparison(og vs artificial) based on GAN's generated paintings
 * http://localhost:8080/images/monet/original
 * http://localhost:8080/images/monet/generated
 * http://localhost:8080/images/image
+* http://localhost:8080/images/generated
 * http://localhost:8080/healthcheck
 
 ### Python backend calls:

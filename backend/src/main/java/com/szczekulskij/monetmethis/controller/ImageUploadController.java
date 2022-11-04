@@ -43,5 +43,10 @@ public class ImageUploadController {
         Resource file = fileLoadingService.loadImage("monet", false);
         return ResponseEntity.ok().header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + file.getFilename() + "\"").body(file);
     }
+    @GetMapping(value = "/generated", produces = MediaType.IMAGE_JPEG_VALUE)
+    public ResponseEntity<Resource> getGeneratedImage(){
+        Resource file = fileLoadingService.loadImage("generated", false);
+        return ResponseEntity.ok().header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + file.getFilename() + "\"").body(file);
+    }
 
 }
