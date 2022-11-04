@@ -1,6 +1,13 @@
 # monet-me-this
 monet paiting comparison(og vs artificial) based on GAN's generated paintings
 
+## Code structure
+* `/python` - pre-trained AI(cycleGAN) model, AI architecture & flask backend
+* `/backend` - Java backend used to upload images
+* `/frontend` - React web app
+* `/images` - Painters paintings (monet, vanGogh etc.). As well as pre-generated using AI monet-like images & normal images.
+
+
 
 
 # Useful commands:
