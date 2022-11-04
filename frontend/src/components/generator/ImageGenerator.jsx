@@ -9,31 +9,21 @@ class ImageGenerator extends Component {
     beforeImage : "../img/before.jpg",
     afterImage : "../img/after.jpg",
     file : 0,
-    base64String : ""
   }
 
-  setFile = (fil) =>
-  this.setState({file : fil})
+  setFile = (fil) => {
+    this.setState({file : fil})
+  }
 
   setBeforeImage = (img) => {
     this.setState({beforeImage : img})
   }
 
-//   _imageEncode = (arrayBuffer) => {
-//     let u8 = new Uint8Array(arrayBuffer)
-//     let b64encoded = btoa([].reduce.call(new Uint8Array(arrayBuffer),function(p,c){return p+String.fromCharCode(c)},''))
-//     let mimetype="image/jpeg"
-//     return "data:"+mimetype+";base64,"+b64encoded
-// }
-
-
-  generateAndSetAfterImage = async (imageURL) => {
-    const backend_url = "http://127.0.0.1:5000/generate/image/monet" 
-    const data = new FormData();
-    data.append('image', imageURL);
-    // const res = await axios.post(backend_url, {'image' : this.state.file}, { headers: {'Content-Type': 'multipart/form-data'}})
-    const res = await axios.post(
-      backend_url, 
+  generateAndSetAfterImage = async (image_type, url_nr) => {
+    // First send call to Python API to generate image and save it as temp.jpg in /images/generated directory
+    let generate_backend_url = "http://127.0.0.1:5000/generate/image/monet" 
+    const response = await axios.post(
+      generate_backend_url, 
       {'image' : this.state.file}, 
       { headers: 
         // {'responseType': 'arraybuffer',
@@ -41,30 +31,13 @@ class ImageGenerator extends Component {
         'Content-Type': 'multipart/form-data'}
       }
     )
-    
-    const buffer = Buffer.from(res.data, 'base64');
-    const image = this._imageEncode(res.data)
-
-    console.log(res.data);
-    console.log(image);
-    console.log(buffer);
-
-    const base64String = btoa(String.fromCharCode(...new Uint8Array(buffer)));
-    console.log("base64String: ",base64String)
-    this.setState({base64String : base64String})
-
-
-
-    // const newImageURL = await URL.createObjectURL(this._imageEncode(res.data))
-    // this.setState({afterImage : newImageURL})
+    console.log("response.data of 1st response:", response.data)
+    let get_backend_url = "http://localhost:8080/images/generated"
+    const res = await axios.get(get_backend_url, {responseType: 'blob'})
+    const image_url = await URL.createObjectURL(res.data)
+    console.log("res.data of 2nd response:", res.data)
+    this.setState({afterImage : image_url})
   }
-
-
-
-
-
-
-
 
   render() {
     return ( 
@@ -73,9 +46,7 @@ class ImageGenerator extends Component {
       <div style = {{margin: "auto", width: "40%"}}>
           <img src={this.state.beforeImage} style = {{width: "40%"}}/>
           <img src="../img/arrow.png" style = {{width: "20%", paddingBottom : "10%"}}/>
-          {/* <img src={this.state.afterImage} style = {{width: "40%"}}/> */}
-          <img src={`data:image/jpg;base64,${this.state.base64String}`} alt="" style = {{width: "40%"}}/>
-          {/* <img src={`data:image/png;base64,${this.state.base64String}`} alt=""/> */}
+          <img src={this.state.afterImage} style = {{width: "40%"}}/>
       </div>
 
       <div style = {{margin: "auto", width: "30%", paddingTop: "30px"}}>
