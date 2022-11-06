@@ -21,7 +21,7 @@ class ImageGenerator extends Component {
 
   generateAndSetAfterImage = async (image_type, url_nr) => {
     // First send call to Python API to generate image and save it as temp.jpg in /images/generated directory
-    let generate_backend_url = "http://127.0.0.1:5000/generate/image/monet" 
+    let generate_backend_url = "http://3.124.60.212:5000/generate/image/monet" 
     const response = await axios.post(
       generate_backend_url, 
       {'image' : this.state.file}, 

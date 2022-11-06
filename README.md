@@ -1,3 +1,9 @@
+# App deployment:
+* Opened all ports
+* ip_address (for both backend & frontend) - *3.124.60.212*
+
+
+
 # monet-me-this
 monet paiting comparison(og vs artificial) based on GAN's generated paintings
 

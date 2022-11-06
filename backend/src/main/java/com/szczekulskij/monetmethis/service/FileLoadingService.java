@@ -17,9 +17,9 @@ import java.util.stream.Collectors;
 @Service
 public class FileLoadingService {
 
-    Path originalMonetPhotosLocation = Paths.get("images/artists/monet/monet_jpg");
-    Path generatedMonetPhotosLocation = Paths.get("images/artists/monet/monet_generated");
-    Path randomImagesPhotosLocation = Paths.get("images/random_images/photo_jpg");
+    Path originalMonetPhotosLocation = Paths.get("../images/artists/monet/monet_jpg");
+    Path generatedMonetPhotosLocation = Paths.get("../images/artists/monet/monet_generated");
+    Path randomImagesPhotosLocation = Paths.get("../images/random_images/photo_jpg");
 
     public Resource loadImage(String artist, boolean original) {
 
