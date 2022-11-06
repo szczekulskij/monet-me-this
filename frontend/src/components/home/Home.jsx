@@ -88,13 +88,13 @@ export default class Navigation2 extends Component {
     updateImage = async (image_type, url_nr) => {
       let backend_url = "" // So that JS doesn't complain
       if (image_type == 'monetsque'){
-        backend_url = "http://localhost:8080/images/monet/original"
+        backend_url = "http://3.124.60.212:8080/images/monet/original"
       }
       if (image_type == 'monet'){
-        backend_url = "http://localhost:8080/images/monet/generated"
+        backend_url = "http://3.124.60.212:8080/images/monet/generated"
       }
       if (image_type == 'normal'){
-        backend_url = "http://localhost:8080/images/image"
+        backend_url = "http://3.124.60.212:8080/images/image"
       }
   
       const res = await axios.get(backend_url, {responseType: 'blob'})

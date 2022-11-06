@@ -32,7 +32,7 @@ class ImageGenerator extends Component {
       }
     )
     console.log("response.data of 1st response:", response.data)
-    let get_backend_url = "http://localhost:8080/images/generated"
+    let get_backend_url = "http://3.124.60.212:8080/images/generated"
     const res = await axios.get(get_backend_url, {responseType: 'blob'})
     const image_url = await URL.createObjectURL(res.data)
     console.log("res.data of 2nd response:", res.data)
