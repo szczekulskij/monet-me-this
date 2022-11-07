@@ -55,7 +55,7 @@ public class FileLoadingService {
     }
 
     public Path getGenerated(){
-        Path path = Paths.get("images/generated_images");
+        Path path = Paths.get("../images/generated_images");
         ArrayList<Path> allFiles = loadAllFiles(path);
         Path filename = allFiles.get(0);
         return path.resolve(filename);
