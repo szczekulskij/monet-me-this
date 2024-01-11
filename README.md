@@ -1,6 +1,13 @@
+command to fix issue I encountered
+NODE_OPTIONS=--openssl-legacy-provider npm run start
+
+
+
+
 # App deployment:
 * Opened all ports
 * ip_address (for both backend & frontend) - *3.124.60.212*
+
 
 
 
