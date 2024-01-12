@@ -21,6 +21,13 @@ const useStyles = makeStyles((theme) => ({
     color: theme.palette.primary.contrastText,
     textDecoration: 'none',
   },
+  buttonHover: {
+    '&:hover': {
+      backgroundColor: '#808080', // Change this to the color you want
+    },
+    borderRight: '2px solid #000', // Change this to the color you want
+    textTransform: 'none',
+  },
 }));
 
 const Header = ({ siteTitle, homepage }) => {
@@ -43,15 +50,50 @@ const Header = ({ siteTitle, homepage }) => {
           <Button
             component={homepage ? AnchorLink : Link}
             offset='64'
-            href='#aboutme'
-            to='/#aboutme'
+            href='#top'
+            to='/'
             color='inherit'
+            className={classes.buttonHover}
           >
-            About me
+            Play
           </Button>
-          <Button component={Link} to='/Portfolio' color='inherit'>
-            Portfolio
+
+          <Button 
+            component={Link} 
+            to='/Portfolio' 
+            color='inherit'
+            className={classes.buttonHover}
+          >
+            Monet History
           </Button>
+
+          <Button 
+            component={Link} 
+            to='/Portfolio' 
+            color='inherit'
+            className={classes.buttonHover}
+          >
+            Monet Painting Generator
+          </Button>
+
+          <Button 
+            component={Link} 
+            to='/Portfolio' 
+            color='inherit'
+            className={classes.buttonHover}
+          >
+            Choose artist
+          </Button>
+
+          <Button 
+            component={Link} 
+            to='/Portfolio' 
+            color='inherit'
+            className={classes.buttonHover}
+          >
+            Choose language
+          </Button>
+
         </Hidden>
       </Toolbar>
     </AppBar>

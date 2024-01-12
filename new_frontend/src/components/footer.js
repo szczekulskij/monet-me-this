@@ -89,11 +89,11 @@ const Footer = ({ homepage }) => {
       <div className={classes.credits}>
         <Container className={classes.footerBottom}>
           <Typography variant='body2' className={classes.creditsText}>
-            © 2023-{new Date().getFullYear()} Jan Szczekulski
+            © 2022-{new Date().getFullYear()} Jan Szczekulski
           </Typography>
           <Typography variant='body2'>
             <a
-              href='https://github.com/szczekulskij/new-cv-react'
+              href='https://github.com/szczekulskij/monet-me-this'
               rel='noopener noreferrer'
               target='_blank'
               data-umami-event='source-code-footer'

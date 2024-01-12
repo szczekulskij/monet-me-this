@@ -3,11 +3,8 @@ import { makeStyles } from '@material-ui/styles';
 import { graphql } from 'gatsby';
 import React from 'react';
 import Layout from '../components/layout';
-import DownloadCVSection from '../components/downloadCVSection';
 import Seo from '../components/seo';
 import Splash from '../components/splash';
-import Timeline from '../components/timeline/timeline';
-import SkillProgressSection from '../components/skillProgressSection/skillProgressSection';
 
 const useStyles = makeStyles((theme) => ({
   section: {
@@ -34,27 +31,7 @@ const IndexPage = ({ data }) => {
     <Layout homepage>
       <Seo title='Home' />
       <Splash />
-      <Box className={classes.section} id='aboutme'>
-        <Container>
-          <div
-            className={classes.aboutme}
-            dangerouslySetInnerHTML={{ __html: data.aboutme.markdown.html }}
-          />
-        </Container>
-      </Box>
-      <DownloadCVSection />
-      <Box className={classes.section}>
-        <Container>
-          <Typography className={classes.subsectionTitle} variant='h5'>
-            My Skills:
-          </Typography>
-          <SkillProgressSection />
-          <Typography className={classes.subsectionTitle} variant='h5'>
-            Timeline
-          </Typography>
-          <Timeline data={data.timeline.nodes} />
-        </Container>
-      </Box>
+      
     </Layout>
   );
 };

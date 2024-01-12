@@ -8,7 +8,6 @@ import MailIcon from '../assets/gmail.svg';
 import InstagramIcon from '../assets/instagram.svg';
 import LinkedIcon from '../assets/linkedin.svg';
 import ResearchGateIcon from '../assets/research_gate.svg';
-import ProfileImage from './profileImage';
 
 const styles = (theme) => ({
   root: {
@@ -60,7 +59,6 @@ class Splash extends Component {
     return (
       <div className={classes.root}>
         <div className={classes.container}>
-          <ProfileImage className={classes.picture} />
           <Typography variant='h1' className={classnames(classes.text, classes.title)}>
             Jan Szczekulski
           </Typography>

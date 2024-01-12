@@ -2,7 +2,6 @@ import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/styles';
 import classnames from 'classnames';
 import React from 'react';
-import ProfileImage from '../profileImage';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -44,7 +43,6 @@ const Splash = () => {
   return (
     <div className={classes.root}>
       <div className={classes.container}>
-        <ProfileImage className={classes.picture} />
         <Typography variant='h1' className={classnames(classes.text, classes.title)}>
           Portfolio
         </Typography>

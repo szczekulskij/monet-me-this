@@ -1,10 +1,10 @@
 module.exports = {
   siteMetadata: {
-    title: `Jan Szczekulski`,
-    shortTitle: `Jan Szczekulski`,
+    title: `Monet Me This`,
+    shortTitle: `Monet Me This`,
     description: ``,
     author: `@szczekulskij`,
-    siteUrl: 'http://jan-cs.com',
+    siteUrl: 'http://monet-me-this.com/',
   },
   plugins: [
     `gatsby-plugin-top-layout`,
@@ -30,8 +30,8 @@ module.exports = {
     {
       resolve: `gatsby-plugin-manifest`,
       options: {
-        name: `Jan Szczekulski`,
-        short_name: `Jan Szczekulski`,
+        name: `Monet Me This`,
+        short_name: `Monet Me This`,
         start_url: `/`,
         background_color: `#1b1b1b`,
         theme_color: `#1b1b1b`,
