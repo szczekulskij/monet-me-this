@@ -4,7 +4,7 @@ import { graphql } from 'gatsby';
 import React from 'react';
 import Layout from '../components/layout';
 import Seo from '../components/seo';
-import Splash from '../components/splash';
+import Game from '../components/game';
 
 const useStyles = makeStyles((theme) => ({
   section: {
@@ -30,15 +30,7 @@ const IndexPage = ({ data }) => {
   return (
     <Layout homepage>
       <Seo title='Game' />
-      <Splash />
-      <Box className={classes.section} id='aboutme'>
-        <Container>
-          <div
-            className={classes.aboutme}
-            dangerouslySetInnerHTML={{ __html: data.aboutme.markdown.html }}
-          />
-        </Container>
-      </Box>
+      <Game />
       
     </Layout>
   );
