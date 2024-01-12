@@ -59,44 +59,6 @@ class Splash extends Component {
     return (
       <div className={classes.root}>
         <div className={classes.container}>
-          <Typography variant='h1' className={classnames(classes.text, classes.title)}>
-            Jan Szczekulski
-          </Typography>
-          <Typography variant='h4' className={classnames(classes.text, classes.subtitle)}>
-            Data Scientist | Software Engineer
-          </Typography>
-          <div className={classes.icons}>
-            <Icon
-              tooltip='szczekulskij'
-              component={<GitHubIcon className={classes.icon} />}
-              href='https://github.com/szczekulskij'
-              analyticsEvent='github'
-            />
-            <Icon
-              tooltip='linkedin'
-              component={<LinkedIcon className={classes.icon} />}
-              href='https://www.linkedin.com/in/jan-szczekulski-272ab615a/'
-              analyticsEvent='linkedin'
-            />
-            <Icon
-              tooltip='email'
-              component={<MailIcon className={classes.icon} />}
-              href='mailto:szczekulskij@gmail.com'
-              analyticsEvent='mail'
-            />
-            <Icon
-              tooltip='@jan_szczekulski'
-              component={<InstagramIcon className={classes.icon} />}
-              href='https://www.instagram.com/jan_szczekulski/'
-              analyticsEvent='instagram'
-            />
-            <Icon
-              tooltip='researchGate'
-              component={<ResearchGateIcon className={classes.icon} />}
-              href='https://www.researchgate.net/profile/Jan-Szczekulski-2/research'
-              analyticsEvent='researchGate'
-            />
-          </div>
         </div>
       </div>
     );

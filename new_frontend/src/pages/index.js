@@ -29,8 +29,16 @@ const IndexPage = ({ data }) => {
   const classes = useStyles();
   return (
     <Layout homepage>
-      <Seo title='Home' />
+      <Seo title='Game' />
       <Splash />
+      <Box className={classes.section} id='aboutme'>
+        <Container>
+          <div
+            className={classes.aboutme}
+            dangerouslySetInnerHTML={{ __html: data.aboutme.markdown.html }}
+          />
+        </Container>
+      </Box>
       
     </Layout>
   );

@@ -8,7 +8,7 @@
 import { graphql, StaticQuery } from 'gatsby';
 import PropTypes from 'prop-types';
 import React from 'react';
-import Background from './background';
+import PlainBackground from './background';
 import Header from './header';
 import Footer from './footer';
 import './layout.css';
@@ -26,7 +26,7 @@ const Layout = ({ children, homepage }) => (
     `}
     render={(data) => (
       <>
-        <Background />
+        <PlainBackground />
         <Header siteTitle={data.site.siteMetadata.shortTitle} homepage={homepage} />
         <main id='top'>{children}</main>
         <Footer homepage={homepage} />
