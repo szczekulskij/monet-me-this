@@ -82,7 +82,7 @@ const Header = ({ siteTitle, homepage }) => {
             color='inherit'
             className={classes.buttonHover}
           >
-            Choose artist
+            Choose Artist
           </Button>
 
           <Button 
@@ -91,7 +91,7 @@ const Header = ({ siteTitle, homepage }) => {
             color='inherit'
             className={classes.buttonHover}
           >
-            Choose language
+            Choose Language
           </Button>
 
         </Hidden>
