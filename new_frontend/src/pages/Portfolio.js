@@ -14,6 +14,9 @@ const useStyles = makeStyles((theme) => ({
     paddingBottom: 24,
     boxShadow: theme.shadows[2],
   },
+  containment: {
+    contain: 'content',
+  },
 }));
 
 const PortfolioPage = ({ data }) => {
@@ -24,7 +27,9 @@ const PortfolioPage = ({ data }) => {
       <Splash />
       <Box className={classes.section}>
         <Container>
-          <History/>
+          <div className={classes.containment}>
+            <History/>
+          </div>
         </Container>
       </Box>
     </Layout>
