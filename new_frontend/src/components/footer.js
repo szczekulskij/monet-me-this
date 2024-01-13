@@ -51,6 +51,7 @@ const Footer = ({ homepage }) => {
       <Container>
         <Grid container spacing={2}>
           <Grid item xs={12} sm={6}>
+            <br></br>
             <Typography variant='h5' className={classes.header}>
               Contact me
             </Typography>

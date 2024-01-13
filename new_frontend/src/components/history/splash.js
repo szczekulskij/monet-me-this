@@ -44,10 +44,7 @@ const Splash = () => {
     <div className={classes.root}>
       <div className={classes.container}>
         <Typography variant='h1' className={classnames(classes.text, classes.title)}>
-          Portfolio
-        </Typography>
-        <Typography variant='h4' className={classnames(classes.text, classes.subtitle)}>
-          By Jan Szczekulski
+          Monet's History
         </Typography>
       </div>
     </div>

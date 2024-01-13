@@ -3,8 +3,8 @@ import { makeStyles } from '@material-ui/styles';
 import { graphql } from 'gatsby';
 import React from 'react';
 import Layout from '../components/layout';
-import TopProjects from '../components/portfolio/projects';
-import Splash from '../components/portfolio/splash';
+import History from '../components/history/history';
+import Splash from '../components/history/splash';
 import Seo from '../components/seo';
 
 const useStyles = makeStyles((theme) => ({
@@ -24,7 +24,7 @@ const PortfolioPage = ({ data }) => {
       <Splash />
       <Box className={classes.section}>
         <Container>
-          <TopProjects topProjects={data.topProjects.nodes} />
+          <History/>
         </Container>
       </Box>
     </Layout>

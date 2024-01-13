@@ -4,7 +4,7 @@ import { graphql } from 'gatsby';
 import React from 'react';
 import Layout from '../components/layout';
 import Seo from '../components/seo';
-import Game from '../components/game';
+import Game from '../components/mainGame/game';
 
 const useStyles = makeStyles((theme) => ({
   section: {
