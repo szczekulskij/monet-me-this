@@ -1,11 +1,13 @@
-import { AppBar, Button, Hidden, Toolbar, Typography, useScrollTrigger } from '@material-ui/core';
+import { AppBar, Button, Hidden, Toolbar, Typography, useScrollTrigger, Menu, MenuItem, ListItemIcon, ListItemText } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import classnames from 'classnames';
 import { Link } from 'gatsby';
 import PropTypes from 'prop-types';
-import React from 'react';
+import React, { useState } from 'react';
 import AnchorLink from 'react-anchor-link-smooth-scroll';
 import MobileNavigation from './mobileNavigation';
+import BrushIcon from '@material-ui/icons/Brush'; // Import the icon you want to use
+import FlagIcon from '@material-ui/icons/Flag'; // Import the icon you want to use
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -31,9 +33,29 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const Header = ({ siteTitle, homepage }) => {
-  const classes = useStyles();
-  const trigger = useScrollTrigger({ disableHysteresis: true, threshold: 100 });
-  return (
+const classes = useStyles();
+const trigger = useScrollTrigger({ disableHysteresis: true, threshold: 100 });
+
+const [artistAnchorEl, setArtistAnchorEl] = useState(null);
+const [languageAnchorEl, setLanguageAnchorEl] = useState(null);
+
+const handleArtistClick = (event) => {
+  setArtistAnchorEl(event.currentTarget);
+};
+
+const handleArtistClose = () => {
+  setArtistAnchorEl(null);
+};
+
+const handleLanguageClick = (event) => {
+  setLanguageAnchorEl(event.currentTarget);
+};
+
+const handleLanguageClose = () => {
+  setLanguageAnchorEl(null);
+};
+
+return (
     <AppBar className={classnames({ [classes.root]: true, [classes.rootSplash]: !trigger })}>
       <Toolbar>
         <MobileNavigation homepage={homepage} />
@@ -77,22 +99,61 @@ const Header = ({ siteTitle, homepage }) => {
           </Button>
 
           <Button 
-            component={Link} 
-            to='/Portfolio' 
+            aria-controls="artist-menu" 
+            aria-haspopup="true" 
+            onClick={handleArtistClick}
             color='inherit'
             className={classes.buttonHover}
           >
-            Choose Artist
+            <BrushIcon />
           </Button>
+          <Menu
+            id="artist-menu"
+            anchorEl={artistAnchorEl}
+            keepMounted
+            open={Boolean(artistAnchorEl)}
+            onClose={handleArtistClose}
+          >
+            <MenuItem onClick={handleArtistClose} component={Link} to='/Monet'>Monet</MenuItem>
+            <MenuItem onClick={handleArtistClose} component={Link} to='/VanGogh'>Van Gogh</MenuItem>
+            <MenuItem onClick={handleArtistClose} component={Link} to='/Picasso'>Picasso</MenuItem>
+          </Menu>
 
           <Button 
-            component={Link} 
-            to='/Portfolio' 
+            aria-controls="language-menu" 
+            aria-haspopup="true" 
+            onClick={handleLanguageClick}
             color='inherit'
             className={classes.buttonHover}
           >
-            Choose Language
+            <FlagIcon />
           </Button>
+          <Menu
+            id="language-menu"
+            anchorEl={languageAnchorEl}
+            keepMounted
+            open={Boolean(languageAnchorEl)}
+            onClose={handleLanguageClose}
+          >
+            <MenuItem onClick={handleLanguageClose}>
+              <ListItemIcon>
+                <FlagIcon /> {/* Replace with the flag icon for Polish */}
+              </ListItemIcon>
+              <ListItemText primary="Polish" />
+            </MenuItem>
+            <MenuItem onClick={handleLanguageClose}>
+              <ListItemIcon>
+                <FlagIcon /> {/* Replace with the flag icon for English */}
+              </ListItemIcon>
+              <ListItemText primary="English" />
+            </MenuItem>
+            <MenuItem onClick={handleLanguageClose}>
+              <ListItemIcon>
+                <FlagIcon /> {/* Replace with the flag icon for Spanish */}
+              </ListItemIcon>
+              <ListItemText primary="Spanish" />
+            </MenuItem>
+          </Menu>
 
         </Hidden>
       </Toolbar>
