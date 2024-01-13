@@ -69,7 +69,7 @@ const Header = ({ siteTitle, homepage }) => {
 
           <Button 
             component={Link} 
-            to='/Portfolio' 
+            to='/generator' 
             color='inherit'
             className={classes.buttonHover}
           >

@@ -52,12 +52,12 @@ class Game extends React.Component {
           }}
         >
           <StaticImage
-            src="../images/profile_pic.png"
+            src="../../images/profile_pic.png"
             alt="Image 1"
             // onClick={() => this.handleImageClick('image1')}
           />
           <StaticImage
-            src="../images/profile_pic.png"
+            src="../../images/profile_pic.png"
             alt="Image 2"
             // onClick={() => this.handleImageClick('image2')}
           />
