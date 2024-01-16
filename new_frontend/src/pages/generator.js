@@ -4,7 +4,7 @@ import { graphql } from 'gatsby';
 import React from 'react';
 import Layout from '../components/layout';
 import Seo from '../components/seo';
-import Game from '../components/generator/generator';
+import Generator from '../components/generator/generator';
 
 const useStyles = makeStyles((theme) => ({
   section: {
@@ -30,7 +30,7 @@ const IndexPage = ({ data }) => {
   return (
     <Layout homepage>
       <Seo title='Game' />
-      <Game />
+      <Generator />
       
     </Layout>
   );

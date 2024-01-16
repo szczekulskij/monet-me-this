@@ -19,7 +19,7 @@ const Generator = () => {
 
   return (
     <Box display="flex" alignItems="center" justifyContent="center" flexDirection="column" height="100vh">
-      <Box display="flex" alignItems="center" justifyContent="center" gap="20px" marginTop="20%">
+      <Box display="flex" alignItems="center" justifyContent="center" gap="20px" marginTop="10%">
         <img src={images[0]} alt="Image 1" width="300" height="200" />
         <ArrowForwardIcon fontSize="large" style={{ color: 'white', transform: 'scaleX(2)', margin: '0 10px' }} />
         <img src={images[1]} alt="Image 2" width="300" height="200" />
