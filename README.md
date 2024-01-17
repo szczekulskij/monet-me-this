@@ -33,7 +33,6 @@ You can find a live version at [monet-me-this.com](http://monet-me-this.com/).
 
 
 # Backends:
-
 ## Java's backend endpoints:
 * http://localhost:8080/images/monet/original
 * http://localhost:8080/images/monet/generated
@@ -42,7 +41,7 @@ You can find a live version at [monet-me-this.com](http://monet-me-this.com/).
 * http://localhost:8080/healthcheck
 
 ## Python backend calls:
-To run backend: `python python/flask_backend/app.py`
+To run backend: `python flask_backend/app.py`
 * http://localhost:5000/generate/image/monet
 * http://localhost:5000/healthcheck
 

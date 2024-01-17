@@ -1,3 +1,11 @@
+import sys
+
+main_path = sys.path[0]
+sys.path.append(main_path + "/../")
+print(sys.path)
+
+
+
 import os
 import matplotlib
 from flask import Flask, request, Response, send_file, session, send_from_directory, redirect, url_for
@@ -43,7 +51,7 @@ UPLOAD_FOLDER ="upload_folder"
 ALLOWED_EXTENSIONS = set(['txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'])
 app.config['CORS_HEADERS'] = 'Content-Type'
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
-monet_generator = tf.keras.models.load_model('python/saved_models/monet_generator.h5')
+monet_generator = tf.keras.models.load_model('cycleGAN/saved_models/monet_generator.h5')
 
 @app.route("/healthcheck")
 def healthcheck():
@@ -57,6 +65,11 @@ def healthcheck():
 #     plt.imshow(output[0])
 #     return 0
 
+
+
+# NEXT THING TO DO! 
+# CHANGE THE IMAGE GENERATION, TO NOT SAVE THE IMAGE as tmp .jpg (since otherwise multiple users can overwrite each other)
+
 @app.route("/generate/image/monet", methods=['POST'])
 def generate_img_based_on_img():
     image_file = request.files['image']
@@ -69,4 +82,4 @@ def generate_img_based_on_img():
 
 
 if __name__ == "__main__":
-    app.run( host='0.0.0.0')
+    app.run( host='0.0.0.0', port = 5001)
