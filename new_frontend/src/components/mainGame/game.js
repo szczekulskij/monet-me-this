@@ -50,10 +50,18 @@ class Game extends React.Component {
   handleImageClick = (image_nr) => {
     // Check if the game has started
     if (!this.state.showButtons && !this.state.showGuessOptions) {
-      if (image_nr == this.state.correct_image_nr) {
+      const isGuessCorrect = image_nr == this.state.correct_image_nr;
+      this.setState({ selectedImage: image_nr, isGuessCorrect });
+  
+      if (isGuessCorrect) {
         this.setState(prevState => ({ score: prevState.score + 1 }));
       }
       this.setState(prevState => ({ totalGuessesSoFar: prevState.totalGuessesSoFar + 1 }), this.checkGameOver);
+  
+      // Clear the selected image state after 1 second
+      // setTimeout(() => this.setState({ selectedImage: null }), 1000);
+      setTimeout(() => this.setState({ selectedImage: null }), 200);
+  
       this.fetchImages();
     }
   };
@@ -134,12 +142,13 @@ class Game extends React.Component {
             width: '80%', // Increase the width to make the images bigger
           }}
         >
-          <div style={{ flex: 1 }}>
+          <div style={{ flex: 1 }} >
             <img
               src={image1} 
               alt="Original" 
               onClick={() => this.handleImageClick('1')}
               style={{ width: '100%', height: 'auto' }} // Set a specific width and height
+              className={this.state.selectedImage === '1' ? (this.state.isGuessCorrect ? 'correct-guess' : 'incorrect-guess') : ''}
             />
           </div>
           <div style={{ flex: 1 }}>
@@ -148,6 +157,7 @@ class Game extends React.Component {
               alt="Generated" 
               onClick={() => this.handleImageClick('2')}
               style={{ width: '100%', height: 'auto' }} // Set a specific width and height
+              className={this.state.selectedImage === '2' ? (this.state.isGuessCorrect ? 'correct-guess' : 'incorrect-guess') : ''}
             />
           </div>
         </Box>
