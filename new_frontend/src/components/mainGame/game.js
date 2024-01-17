@@ -6,7 +6,6 @@ import Dialog from '@material-ui/core/Dialog';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogActions from '@material-ui/core/DialogActions';
-import { StaticImage } from 'gatsby-plugin-image';
 import Typography from '@material-ui/core/Typography';
 
 class Game extends React.Component {
@@ -18,9 +17,11 @@ class Game extends React.Component {
     showGuessOptions: false,
 
     // game state related
-    original: null,
-    generated: null,
+    image1: null,
+    image2: null,
+    correct_image_nr: null,
     gameOver: false,
+    totalGuessesSoFar: 0,
   };
 
   componentDidMount() {
@@ -35,23 +36,29 @@ class Game extends React.Component {
       const original_image_url = await URL.createObjectURL(originalResponse.data)
       const generated_image_url = await URL.createObjectURL(generatedResponse.data)
 
-      this.setState({ original: original_image_url, generated: generated_image_url });
-      console.log(originalResponse.data);
+      if (Math.random() < 0.5) {
+        this.setState({ image1: original_image_url, image2: generated_image_url, correct_image_nr: "1"});
+      }
+      else {
+        this.setState({ image1: generated_image_url, image2: original_image_url, correct_image_nr: "2"});
+      }
     } catch (error) {
       console.error(error);
     }
   };
   
-  handleImageClick = (image) => {
-    if (image === this.state.original) {
+  handleImageClick = (image_nr) => {
+    if (image_nr == this.state.correct_image_nr) {
       this.setState(prevState => ({ score: prevState.score + 1 }));
     }
-    this.setState(prevState => ({ totalGuesses: prevState.totalGuesses + 1 }), this.checkGameOver);
+    this.setState(prevState => ({ totalGuessesSoFar: prevState.totalGuessesSoFar + 1 }), this.checkGameOver);
+    this.fetchImages();
   };
   
   checkGameOver = () => {
-    if (this.state.totalGuesses === 10) {
+    if (this.state.totalGuessesSoFar === this.state.totalGuesses) {
       this.setState({ gameOver: true });
+      console.log("Game over!")
     } else {
       this.fetchImages();
     }
@@ -74,7 +81,7 @@ class Game extends React.Component {
   };
 
   render() {
-    const { showButtons, showMessage, score, totalGuesses, showGuessOptions , original, generated, gameOver} = this.state;
+    const { showButtons, showMessage, score, totalGuesses, showGuessOptions , image1, image2, image1_label, image2_label, gameOver} = this.state;
 
     if (gameOver) {
       let message;
@@ -112,19 +119,19 @@ class Game extends React.Component {
             width: '80%', // Increase the width to make the images bigger
           }}
         >
-          <div style={{ flex: 1 }} onClick={this.handleImageClick}>
+          <div style={{ flex: 1 }}>
             <img
-              src={original} 
+              src={image1} 
               alt="Original" 
-              onClick={() => this.handleImageClick('original')}
+              onClick={() => this.handleImageClick('1')}
               style={{ width: '100%', height: 'auto' }} // Set a specific width and height
             />
           </div>
-          <div style={{ flex: 1 }} onClick={this.handleImageClick}>
+          <div style={{ flex: 1 }}>
             <img
-              src={generated} 
+              src={image2} 
               alt="Generated" 
-              onClick={() => this.handleImageClick('generated')}
+              onClick={() => this.handleImageClick('2')}
               style={{ width: '100%', height: 'auto' }} // Set a specific width and height
             />
           </div>
