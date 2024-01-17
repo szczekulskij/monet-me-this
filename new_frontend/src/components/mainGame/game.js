@@ -6,19 +6,26 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogActions from '@material-ui/core/DialogActions';
 import { StaticImage } from 'gatsby-plugin-image';
+import Typography from '@material-ui/core/Typography';
 
 class Game extends React.Component {
   state = {
     showButtons: true,
     showMessage: false,
+    score: 0,
+    showGuessOptions: false,
   };
 
-  handleImageClick = (imageId) => {
-    // Handle image click event
+  handleImageClick = () => {
+    this.setState(prevState => ({ score: prevState.score + 1 }));
   };
 
   handleStartClick = () => {
-    this.setState({ showButtons: false });
+    this.setState({ showGuessOptions: true });
+  };
+  
+  handleGuessOptionClick = (guesses) => {
+    this.setState({ showButtons: false, totalGuesses: guesses, showGuessOptions: false });
   };
 
   handleTutorialClick = () => {
@@ -30,8 +37,11 @@ class Game extends React.Component {
   };
 
   render() {
-    const { showButtons, showMessage } = this.state;
-
+    const { showButtons, showMessage, score, totalGuesses, showGuessOptions } = this.state;
+  
+    const scoreRatio = score / totalGuesses;
+    const scoreColor = scoreRatio > 0.5 ? 'green' : scoreRatio > 0.25 ? 'orange' : 'red';
+  
     return (
       <Box
         style={{
@@ -40,7 +50,7 @@ class Game extends React.Component {
           flexDirection: 'column',
           alignItems: 'center',
           justifyContent: 'center',
-          height: '100vh',
+          minHeight: '100vh',
           gap: '20px',
         }}
       >
@@ -49,19 +59,49 @@ class Game extends React.Component {
             display: 'flex',
             gap: '20px',
             filter: showButtons ? 'brightness(50%)' : 'none',
+            width: '80%',
           }}
         >
-          <StaticImage
-            src="../../images/profile_pic.png"
-            alt="Image 1"
-            // onClick={() => this.handleImageClick('image1')}
-          />
-          <StaticImage
-            src="../../images/profile_pic.png"
-            alt="Image 2"
-            // onClick={() => this.handleImageClick('image2')}
-          />
+          <div onClick={this.handleImageClick}>
+            <StaticImage
+              src="../../images/profile_pic.png"
+              alt="Image 1"
+              style={{ width: '100%' }}
+            />
+          </div>
+          <div onClick={this.handleImageClick}>
+            <StaticImage
+              src="../../images/profile_pic.png"
+              alt="Image 2"
+              style={{ width: '100%' }}
+            />
+          </div>
         </Box>
+        {!showButtons && (
+          <Box style={{ 
+            width: '80%', 
+            height: '2px', 
+            backgroundColor: 'grey', 
+            position: 'relative',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+          }}>
+            <div style={{ 
+              width: `${scoreRatio * 100}%`, 
+              height: '2px', 
+              backgroundColor: scoreColor, 
+              transition: 'width 2s ease' 
+            }} />
+            <Typography style={{ 
+              position: 'absolute', 
+              color: 'white', 
+              fontSize: '12px',
+            }}>
+              {score}/{totalGuesses}
+            </Typography>
+          </Box>
+        )}
         {showButtons && (
           <Box
             style={{
@@ -81,6 +121,15 @@ class Game extends React.Component {
               Tutorial
             </Button>
           </Box>
+        )}
+        <Dialog open={showGuessOptions} onClose={this.handleClose}>
+          <DialogTitle>Choose the number of guesses</DialogTitle>
+          <DialogContent>
+            <Button onClick={() => this.handleGuessOptionClick(10)}>10 guesses</Button>
+            <Button onClick={() => this.handleGuessOptionClick(25)}>25 guesses</Button>
+            <Button onClick={() => this.handleGuessOptionClick(50)}>50 guesses</Button>
+          </DialogContent>
+        </Dialog>
         )}
         <Dialog open={showMessage} onClose={this.handleClose}>
           <DialogTitle>{"Tutorial"}</DialogTitle>
