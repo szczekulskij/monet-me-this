@@ -45,3 +45,9 @@ You can find a live version at [monet-me-this.com](http://monet-me-this.com/).
 To run backend: `python python/flask_backend/app.py`
 * http://localhost:5000/generate/image/monet
 * http://localhost:5000/healthcheck
+
+
+
+# CycleGAN:
+## Requirements
+* python - 3.8.16
