@@ -13,8 +13,30 @@ const Generator = () => {
     onDrop: (acceptedFiles) => {
       const url = URL.createObjectURL(acceptedFiles[0]);
       setImages([url, url]);
+
+      // Create a new FormData instance
+      const data = new FormData();
+      // Append the file to the form data
+      data.append('image', acceptedFiles[0]);
+
+      // Make a POST request to the backend
+      fetch('http://127.0.0.1:5001/generate/image/monet', {
+        method: 'POST',
+        body: data
+      })
+      .then(response => response.blob())
+      .then(blob => {
+        // Create an object URL for the blob
+        const objectURL = URL.createObjectURL(blob);
+        // Update the second image with the response from the backend
+        setImages([url, objectURL]);
+      })
+      .catch(error => {
+        console.error('Error:', error);
+      });
     }
   });
+
 
   return (
     <Box display="flex" alignItems="center" justifyContent="center" flexDirection="column" height="100vh">

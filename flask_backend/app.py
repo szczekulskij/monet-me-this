@@ -82,8 +82,8 @@ def generate_img_based_on_img():
     image = transform_image(image)
     generated_image_tensor = monet_generator(image)[0]
     save_img(f"images/generated_images/{filename}", generated_image_tensor)
-    save_img(f"python/flask_backend/{filename}", generated_image_tensor)
-    return send_file("temp.jpg")
+    save_img(f"flask_backend/{filename}", generated_image_tensor)
+    return send_file(f"{filename}")
 
 
 if __name__ == "__main__":
