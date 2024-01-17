@@ -48,11 +48,14 @@ class Game extends React.Component {
   };
   
   handleImageClick = (image_nr) => {
-    if (image_nr == this.state.correct_image_nr) {
-      this.setState(prevState => ({ score: prevState.score + 1 }));
+    // Check if the game has started
+    if (!this.state.showButtons && !this.state.showGuessOptions) {
+      if (image_nr == this.state.correct_image_nr) {
+        this.setState(prevState => ({ score: prevState.score + 1 }));
+      }
+      this.setState(prevState => ({ totalGuessesSoFar: prevState.totalGuessesSoFar + 1 }), this.checkGameOver);
+      this.fetchImages();
     }
-    this.setState(prevState => ({ totalGuessesSoFar: prevState.totalGuessesSoFar + 1 }), this.checkGameOver);
-    this.fetchImages();
   };
   
   checkGameOver = () => {
