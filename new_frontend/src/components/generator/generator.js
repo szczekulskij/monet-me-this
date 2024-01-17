@@ -1,13 +1,12 @@
 import React, { useState } from 'react';
-import { Box, Button } from '@material-ui/core';
+import { Box, Button, Typography } from '@material-ui/core';
 import { useDropzone } from 'react-dropzone';
 import ArrowForwardIcon from '@material-ui/icons/ArrowForward';
+import beforeImage from '../../images/before.jpg';
+import afterImage from '../../images/after.jpg';
 
 const Generator = () => {
-  const [images, setImages] = useState([
-    'https://via.placeholder.com/300x200',
-    'https://via.placeholder.com/300x200'
-  ]);
+  const [images, setImages] = useState([beforeImage, afterImage]);
 
   const { getRootProps, getInputProps } = useDropzone({
     accept: 'image/*',
@@ -19,7 +18,10 @@ const Generator = () => {
 
   return (
     <Box display="flex" alignItems="center" justifyContent="center" flexDirection="column" height="100vh">
-      <Box display="flex" alignItems="center" justifyContent="center" gap="20px" marginTop="10%">
+      <Typography variant="h4" component="h1" gutterBottom style={{ color: 'white' }}>
+        Generate your own Monete-sque painting!
+      </Typography>
+      <Box display="flex" alignItems="center" justifyContent="center" gap="20px" marginTop="5%">
         <img src={images[0]} alt="Image 1" width="300" height="200" />
         <ArrowForwardIcon fontSize="large" style={{ color: 'white', transform: 'scaleX(2)', margin: '0 10px' }} />
         <img src={images[1]} alt="Image 2" width="300" height="200" />
