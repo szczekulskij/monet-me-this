@@ -1,7 +1,7 @@
 import tensorflow as tf
 from tensorflow import keras
 import tensorflow_addons as tfa
-from python.src.config import IMAGE_SIZE
+from cycleGAN.src.config import IMAGE_SIZE
 
 def Downsample(X, filter_count, kernel_size, padding, stride, apply_norm=True):
     initializer = tf.random_normal_initializer(0., 0.02)

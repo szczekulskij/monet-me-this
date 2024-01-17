@@ -22,9 +22,9 @@ warnings.warn("ignore")
 import numpy as np
 import pandas as pd
 
-from python.src.data_handling import load_dataset
-from python.src.config import STRATEGY as strategy
-from python.src.config import (BATCH_SIZE, IMAGE_SIZE, BATCH_SIZE, SIZE_RESIZE, AUTOTUNE, EPOCHS)
+from cycleGAN.src.data_handling import load_dataset
+from cycleGAN.src.config import STRATEGY as strategy
+from cycleGAN.src.config import (BATCH_SIZE, IMAGE_SIZE, BATCH_SIZE, SIZE_RESIZE, AUTOTUNE, EPOCHS)
 
 def transform_image(image):
     a = tf.keras.preprocessing.image.img_to_array(image) 

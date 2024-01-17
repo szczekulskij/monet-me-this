@@ -1,4 +1,4 @@
-from python.src.utils import connect_to_tpu
+from cycleGAN.src.utils import connect_to_tpu
 
 EPOCHS = 100
 IMAGE_SIZE = 256
