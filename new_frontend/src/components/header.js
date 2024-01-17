@@ -17,6 +17,7 @@ const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
     transition: 'all 250ms',
+    height: 64,
   },
   rootSplash: {
     backgroundColor: 'transparent',
@@ -26,12 +27,16 @@ const useStyles = makeStyles((theme) => ({
     flexGrow: 1,
     color: theme.palette.primary.contrastText,
     textDecoration: 'none',
+    '&:hover': {
+      color: '#fff', 
+    },
   },
   buttonHover: {
     '&:hover': {
-      backgroundColor: '#808080', // Change this to the color you want
+      backgroundColor: '#808080', 
+      color: '#fff', 
     },
-    borderRight: '2px solid #000', // Change this to the color you want
+    borderRight: '2px solid #000', 
     textTransform: 'none',
   },
 }));
@@ -95,7 +100,7 @@ return (
 
           <Button 
             component={Link} 
-            to='/generator' 
+            to='/Generator' 
             color='inherit'
             className={classes.buttonHover}
           >

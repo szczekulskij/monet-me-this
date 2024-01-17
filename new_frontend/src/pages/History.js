@@ -36,34 +36,4 @@ const HistoryPage = ({ data }) => {
   );
 };
 
-export const query = graphql`
-  query {
-    topProjects: allMarkdownRemark(
-      filter: {
-        fileAbsolutePath: { regex: "/topprojects/" }
-        internal: { type: { eq: "MarkdownRemark" } }
-      }
-      sort: { fields: frontmatter___order, order: ASC }
-    ) {
-      nodes {
-        html
-        frontmatter {
-          name
-          GHlink
-          secondLink
-          secondLinkCallToAction
-          background
-          color
-          technologies
-          photoName {
-            childImageSharp {
-              gatsbyImageData(layout: FIXED, placeholder: BLURRED, width: 80, height: 80)
-            }
-          }
-        }
-      }
-    }
-  }
-`;
-
 export default HistoryPage;
