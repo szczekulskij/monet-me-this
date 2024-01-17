@@ -112,22 +112,22 @@ class Game extends React.Component {
             width: '80%', // Increase the width to make the images bigger
           }}
         >
-          <div onClick={this.handleImageClick}>
-          <img
-            src={original} 
-            alt="Original" 
-            onClick={() => this.handleImageClick('original')}
-            style={{ width: '100%' }}
-          />
-        </div>
-        <div onClick={this.handleImageClick}>
-          <img
-            src={generated} 
-            alt="Generated" 
-            onClick={() => this.handleImageClick('generated')}
-            style={{ width: '100%' }}
-          />
-        </div>
+          <div style={{ flex: 1 }} onClick={this.handleImageClick}>
+            <img
+              src={original} 
+              alt="Original" 
+              onClick={() => this.handleImageClick('original')}
+              style={{ width: '100%', height: 'auto' }} // Set a specific width and height
+            />
+          </div>
+          <div style={{ flex: 1 }} onClick={this.handleImageClick}>
+            <img
+              src={generated} 
+              alt="Generated" 
+              onClick={() => this.handleImageClick('generated')}
+              style={{ width: '100%', height: 'auto' }} // Set a specific width and height
+            />
+          </div>
         </Box>
         <Box style={{ 
           width: '80%', // Increase the width to make the horizontal line bigger
