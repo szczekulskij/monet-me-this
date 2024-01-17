@@ -19,11 +19,11 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const PortfolioPage = ({ data }) => {
+const HistoryPage = ({ data }) => {
   const classes = useStyles();
   return (
     <Layout>
-      <Seo title='Portfolio' />
+      <Seo title='History' />
       <Splash />
       <Box className={classes.section}>
         <Container>
@@ -66,4 +66,4 @@ export const query = graphql`
   }
 `;
 
-export default PortfolioPage;
+export default HistoryPage;

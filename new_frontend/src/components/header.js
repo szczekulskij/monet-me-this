@@ -86,7 +86,7 @@ return (
 
           <Button 
             component={Link} 
-            to='/Portfolio' 
+            to='/History' 
             color='inherit'
             className={classes.buttonHover}
           >
