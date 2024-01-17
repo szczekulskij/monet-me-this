@@ -28,10 +28,9 @@ const useStyles = makeStyles((theme) => ({
 const IndexPage = ({ data }) => {
   const classes = useStyles();
   return (
-    <Layout homepage>
+    <Layout>
       <Seo title='Game' />
       <Generator />
-      
     </Layout>
   );
 };
