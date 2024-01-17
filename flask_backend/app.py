@@ -19,6 +19,9 @@ from tensorflow.keras.utils import save_img
 from tensorflow.keras.layers import Layer
 from werkzeug.utils import secure_filename
 
+import datetime
+import time
+
 from PIL import Image
 import matplotlib.pyplot as plt
 from flask_cors import CORS, cross_origin
@@ -66,18 +69,20 @@ def healthcheck():
 #     return 0
 
 
-
-# NEXT THING TO DO! 
-# CHANGE THE IMAGE GENERATION, TO NOT SAVE THE IMAGE as tmp .jpg (since otherwise multiple users can overwrite each other)
-
 @app.route("/generate/image/monet", methods=['POST'])
 def generate_img_based_on_img():
+    # Add timestamp to filename to keep it unique!
+    current_time = datetime.datetime.now()
+    milliseconds = int(time.mktime(current_time.timetuple())) * 1000
+    stringed = str(milliseconds + current_time.microsecond)
+    filename = "temp" + stringed + ".jpg"
+
     image_file = request.files['image']
     image = Image.open(image_file.stream)
     image = transform_image(image)
     generated_image_tensor = monet_generator(image)[0]
-    save_img("images/generated_images/temp.jpg", generated_image_tensor)
-    save_img("python/flask_backend/temp.jpg", generated_image_tensor)
+    save_img(f"images/generated_images/{filename}", generated_image_tensor)
+    save_img(f"python/flask_backend/{filename}", generated_image_tensor)
     return send_file("temp.jpg")
 
 
