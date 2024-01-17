@@ -9,6 +9,10 @@ import MobileNavigation from './mobileNavigation';
 import BrushIcon from '@material-ui/icons/Brush'; // Import the icon you want to use
 import FlagIcon from '@material-ui/icons/Flag'; // Import the icon you want to use
 
+import englishFlag from '../images/english_flag.png'; // Replace with the actual path
+import polishFlag from '../images/polish_flag.png'; // Replace with the actual path
+import spanishFlag from '../images/spanish_flag.png'; // Replace with the actual path
+
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
@@ -137,19 +141,19 @@ return (
           >
             <MenuItem onClick={handleLanguageClose}>
               <ListItemIcon>
-                <FlagIcon /> {/* Replace with the flag icon for Polish */}
-              </ListItemIcon>
-              <ListItemText primary="Polish" />
-            </MenuItem>
-            <MenuItem onClick={handleLanguageClose}>
-              <ListItemIcon>
-                <FlagIcon /> {/* Replace with the flag icon for English */}
+                <img src={englishFlag} alt="English" width="35" height="35"/> {/* Replace FlagIcon with the flag image for English */}
               </ListItemIcon>
               <ListItemText primary="English" />
             </MenuItem>
             <MenuItem onClick={handleLanguageClose}>
               <ListItemIcon>
-                <FlagIcon /> {/* Replace with the flag icon for Spanish */}
+                <img src={polishFlag} alt="Polish" width="35" height="35"/> {/* Replace FlagIcon with the flag image for Polish */}
+              </ListItemIcon>
+              <ListItemText primary="Polish" />
+            </MenuItem>
+            <MenuItem onClick={handleLanguageClose}>
+              <ListItemIcon>
+                <img src={spanishFlag} alt="Spanish" width="35" height="35"/> {/* Replace FlagIcon with the flag image for Spanish */}
               </ListItemIcon>
               <ListItemText primary="Spanish" />
             </MenuItem>
