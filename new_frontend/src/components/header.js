@@ -17,7 +17,6 @@ const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
     transition: 'all 250ms',
-    height: 64,
   },
   rootSplash: {
     backgroundColor: 'transparent',
@@ -27,9 +26,7 @@ const useStyles = makeStyles((theme) => ({
     flexGrow: 1,
     color: theme.palette.primary.contrastText,
     textDecoration: 'none',
-    '&:hover': {
-      color: '#fff', 
-    },
+    '&:hover': {color: '#fff', },
   },
   buttonHover: {
     '&:hover': {
