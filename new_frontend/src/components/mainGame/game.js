@@ -80,23 +80,35 @@ class Game extends React.Component {
     this.setState({ showMessage: false });
   };
 
-  render() {
-    const { showButtons, showMessage, score, totalGuesses, showGuessOptions , image1, image2, image1_label, image2_label, gameOver} = this.state;
+  handleTryAgainClick = () => {
+    this.setState({
+      showButtons: true,
+      gameOver: false,
+      score: 0,
+      totalGuessesSoFar: 0,
+    });
+  };
 
-    if (gameOver) {
-      let message;
-      if (score > 7) {
-        message = 'Great job!';
-      } else if (score > 4) {
-        message = 'Good job!';
-      } else {
-        message = 'Better luck next time!';
-      }
-      return <div>{message}</div>;
-    }
+  render() {
+    const { showButtons, showMessage, score, totalGuesses, showGuessOptions , image1, image2, gameOver} = this.state;
+
+    const MESSAGES = {
+      "great" : "Woooah. You are amazing at this, with you in this world AI doesn't seem so terrifying anymore.",
+      "medium" : "Well done. This a great score - but I know you can do better. Wanna try again ?",
+      "bad" : "You make me feel proud (of AI). Please try again, I'm sure you can do better!"
+  }
   
     const scoreRatio = score / totalGuesses;
     const scoreColor = scoreRatio > 0.5 ? 'green' : scoreRatio > 0.25 ? 'orange' : 'red';
+
+    let message;
+    if (scoreRatio > 0.8) {
+      message = MESSAGES["great"];
+    } else if (scoreRatio > 0.5) {
+      message = MESSAGES["medium"];
+    } else {
+      message = MESSAGES["bad"];
+    }
   
     return (
       <Box
@@ -249,6 +261,18 @@ class Game extends React.Component {
             </Button>
           </DialogActions>
         </Dialog>
+
+        <Dialog open={gameOver} onClose={this.handleTryAgainClick}>
+        <DialogTitle>{"Game Over"}</DialogTitle>
+        <DialogContent>
+          <Typography>{message}</Typography>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={this.handleTryAgainClick} color="primary">
+            Try Again
+          </Button>
+        </DialogActions>
+      </Dialog>
       </Box>
     );
   }
