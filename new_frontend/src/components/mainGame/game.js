@@ -130,7 +130,6 @@ class Game extends React.Component {
             <Button onClick={() => this.handleGuessOptionClick(50)}>50 guesses</Button>
           </DialogContent>
         </Dialog>
-        )}
         <Dialog open={showMessage} onClose={this.handleClose}>
           <DialogTitle>{"Tutorial"}</DialogTitle>
           <DialogContent>
