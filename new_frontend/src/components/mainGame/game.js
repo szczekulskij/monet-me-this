@@ -1,6 +1,7 @@
 import React from 'react';
 import Button from '@material-ui/core/Button';
 import Box from '@material-ui/core/Box';
+import axios from 'axios';
 import Dialog from '@material-ui/core/Dialog';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import DialogContent from '@material-ui/core/DialogContent';
@@ -10,16 +11,52 @@ import Typography from '@material-ui/core/Typography';
 
 class Game extends React.Component {
   state = {
+    // buttons and messages related
     showButtons: true,
     showMessage: false,
     score: 0,
     showGuessOptions: false,
+
+    // game state related
+    original: null,
+    generated: null,
+    gameOver: false,
   };
 
-  handleImageClick = () => {
-    this.setState(prevState => ({ score: prevState.score + 1 }));
-  };
+  componentDidMount() {
+    this.fetchImages();
+  }
 
+  fetchImages = async () => {
+    try {
+      const originalResponse = await axios.get('http://localhost:8080/images/monet/original', {responseType: 'blob'});
+      const generatedResponse = await axios.get('http://localhost:8080/images/monet/generated', {responseType: 'blob'});
+
+      const original_image_url = await URL.createObjectURL(originalResponse.data)
+      const generated_image_url = await URL.createObjectURL(generatedResponse.data)
+
+      this.setState({ original: original_image_url, generated: generated_image_url });
+      console.log(originalResponse.data);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+  
+  handleImageClick = (image) => {
+    if (image === this.state.original) {
+      this.setState(prevState => ({ score: prevState.score + 1 }));
+    }
+    this.setState(prevState => ({ totalGuesses: prevState.totalGuesses + 1 }), this.checkGameOver);
+  };
+  
+  checkGameOver = () => {
+    if (this.state.totalGuesses === 10) {
+      this.setState({ gameOver: true });
+    } else {
+      this.fetchImages();
+    }
+  };
+  
   handleStartClick = () => {
     this.setState({ showButtons: false, showGuessOptions: true });
   };
@@ -27,17 +64,29 @@ class Game extends React.Component {
   handleGuessOptionClick = (guesses) => {
     this.setState({ showButtons: false, totalGuesses: guesses, showGuessOptions: false });
   };
-
+  
   handleTutorialClick = () => {
     this.setState({ showMessage: true });
   };
-
+  
   handleClose = () => {
     this.setState({ showMessage: false });
   };
 
   render() {
-    const { showButtons, showMessage, score, totalGuesses, showGuessOptions } = this.state;
+    const { showButtons, showMessage, score, totalGuesses, showGuessOptions , original, generated, gameOver} = this.state;
+
+    if (gameOver) {
+      let message;
+      if (score > 7) {
+        message = 'Great job!';
+      } else if (score > 4) {
+        message = 'Good job!';
+      } else {
+        message = 'Better luck next time!';
+      }
+      return <div>{message}</div>;
+    }
   
     const scoreRatio = score / totalGuesses;
     const scoreColor = scoreRatio > 0.5 ? 'green' : scoreRatio > 0.25 ? 'orange' : 'red';
@@ -64,19 +113,21 @@ class Game extends React.Component {
           }}
         >
           <div onClick={this.handleImageClick}>
-            <StaticImage
-              src="../../images/profile_pic.png"
-              alt="Image 1"
-              style={{ width: '100%' }}
-            />
-          </div>
-          <div onClick={this.handleImageClick}>
-            <StaticImage
-              src="../../images/profile_pic.png"
-              alt="Image 2"
-              style={{ width: '100%' }}
-            />
-          </div>
+          <img
+            src={original} 
+            alt="Original" 
+            onClick={() => this.handleImageClick('original')}
+            style={{ width: '100%' }}
+          />
+        </div>
+        <div onClick={this.handleImageClick}>
+          <img
+            src={generated} 
+            alt="Generated" 
+            onClick={() => this.handleImageClick('generated')}
+            style={{ width: '100%' }}
+          />
+        </div>
         </Box>
         <Box style={{ 
           width: '80%', // Increase the width to make the horizontal line bigger
