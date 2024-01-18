@@ -1,42 +1,74 @@
 {
-  "name": "landingpage-react-template",
+  "name": "monet-me-this",
   "private": true,
+  "description": "Web App GAme",
+  "version": "2.0.0",
+  "author": "Jan Szczekulski <szczekulskij@gmail.com>",
   "dependencies": {
-    "@testing-library/jest-dom": "^4.2.4",
-    "@testing-library/react": "^9.3.2",
-    "@testing-library/user-event": "^7.1.2",
-    "axios": "^0.27.2",
-    "dompurify": "^2.4.0",
-    "emailjs-com": "^2.6.4",
-    "html-to-react": "^1.5.0",
-    "react": "^17.0.1",
-    "react-dom": "^17.0.1",
-    "react-icons": "^4.6.0",
-    "react-router-dom": "6",
-    "react-scripts": "^4.0.2",
-    "semantic-ui-css": "^2.5.0",
-    "semantic-ui-react": "^2.1.3",
-    "smooth-scroll": "^16.1.3"
+    "@emotion/react": "^11.11.1",
+    "@emotion/styled": "^11.11.0",
+    "@material-ui/core": "^4.12.4",
+    "@material-ui/icons": "^4.11.2",
+    "@material-ui/styles": "^4.11.4",
+    "@mui/material": "^5.14.2",
+    "classnames": "^2.3.1",
+    "dayjs": "^1.10.7",
+    "gatsby": "^4.1.0",
+    "gatsby-cli": "^4.1.0",
+    "gatsby-plugin-google-fonts": "^1.0.1",
+    "gatsby-plugin-image": "^2.1.0",
+    "gatsby-plugin-manifest": "^4.1.0",
+    "gatsby-plugin-material-ui": "3.0.1",
+    "gatsby-plugin-netlify": "^3.14.0",
+    "gatsby-plugin-offline": "^5.1.0",
+    "gatsby-plugin-react-helmet": "^5.1.0",
+    "gatsby-plugin-react-svg": "^3.1.0",
+    "gatsby-plugin-robots-txt": "^1.6.14",
+    "gatsby-plugin-sharp": "^4.1.0",
+    "gatsby-source-filesystem": "^4.1.0",
+    "gatsby-transformer-json": "^4.1.0",
+    "gatsby-transformer-remark": "^5.1.0",
+    "gatsby-transformer-sharp": "^4.1.0",
+    "html-to-react": "^1.7.0",
+    "node-sass": "^9.0.0",
+    "prop-types": "^15.7.2",
+    "react": "^17.0.2",
+    "react-anchor-link-smooth-scroll": "^1.0.12",
+    "react-dom": "^17.0.2",
+    "react-dropzone": "^14.2.3",
+    "react-helmet": "^6.1.0",
+    "react-html-parser": "^2.0.2",
+    "react-tsparticles": "^1.37.2",
+    "react-vertical-timeline-component": "^3.5.2",
+    "styled-components": "^5.3.3",
+    "styled-media-query": "^2.1.2"
   },
+  "devDependencies": {
+    "eslint-plugin-prettier": "^5.1.3",
+    "prettier": "^2.8.8"
+  },
+  "keywords": [
+    "gatsby",
+    "monet-me-this",
+    "AI",
+    "CycleGAN",
+    "GAN"
+  ],
+  "license": "MIT",
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "build": "gatsby build && cp src/assets/resume.pdf public/.",
+    "develop": "gatsby develop",
+    "format": "prettier --write src/**/*.{js,jsx}",
+    "start": "npm run develop",
+    "serve": "gatsby serve",
+    "test": "echo \"Write tests! -> https://gatsby.dev/unit-testing\"",
+    "clean": "gatsby clean"
   },
-  "eslintConfig": {
-    "extends": "react-app"
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/szczekulskij/monet-me-this"
   },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
+  "bugs": {
+    "url": "https://github.com/szczekulskij/monet-me-this/issues"
   }
 }
