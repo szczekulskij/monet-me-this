@@ -40,6 +40,9 @@ You can find a live version at [monet-me-this.com](http://monet-me-this.com/).
 * http://localhost:8080/images/generated
 * http://localhost:8080/healthcheck
 
+### Java's requirements:
+* java - 21.0.1 (although I can safely assume 1.8 would work as well)
+
 ## Python backend calls:
 To run backend: `python flask_backend/app.py`
 * http://localhost:5000/generate/image/monet
